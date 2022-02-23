@@ -35,9 +35,10 @@ public class ObstaclesCreation : MonoBehaviour
 
     private void checkClick(Vector2 clickPos)
     {
+        //Clic sur une cellule occupée
         if (collider != Physics2D.OverlapPoint(clickPos))
         {
-            foreach(GameObject obs in obstacleTiles)
+            foreach (GameObject obs in obstacleTiles)
             {
                 Vector2 pos = obs.transform.position;
                 if (pos == clickPos)
@@ -49,21 +50,21 @@ public class ObstaclesCreation : MonoBehaviour
                 }
             }
         }
+
+        //Clic sur une cellule vide mais nbr max d'obstacles atteint
+        else if (obstacleTiles.Count > maxObstacles)
+        {
+            Debug.Log("Nombre maximum d'obstacles placés");
+        }
+
+        //Clic sur une cellule vide
         else
         {
-            if (obstacleTiles.Count < maxObstacles)
-            {
-                GameObject newObstacle = Instantiate(obstacle);
-                newObstacle.transform.position = clickPos;
-                obstacleTiles.Add(newObstacle);
-                AstarPath.active.Scan();
-                Debug.Log("Obstacle créé");
-            }
-            else
-            {
-                Debug.Log("Nombre maximum d'obstacles placés");
-            }
-
+            GameObject newObstacle = Instantiate(obstacle);
+            newObstacle.transform.position = clickPos;
+            obstacleTiles.Add(newObstacle);
+            AstarPath.active.Scan();
+            Debug.Log("Obstacle créé");
         }
     }
 }
