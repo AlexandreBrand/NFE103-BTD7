@@ -1,24 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public class ObstaclesCreation : MonoBehaviour
 {
 
+    public GameObject obstacle;
+    private new BoxCollider2D collider;
+
+    [SerializeField] private int maxObstacles;
+
+    private List<GameObject> obstacleTiles = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        obstacle.transform.position = new Vector2(10, 4);
-        obstacle.layer = 9;
+        collider = GetComponent<BoxCollider2D>();
     }
 
-    public Vector2 mousePosition;
 
     // Update is called once per frame
     void Update()
     {
-        //mousePosition = Mouse.current.position.ReadValue();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 clickPos = new Vector2(
+                Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
+                Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
+
+            checkClick(clickPos);
+        }
+    }
+
+    private void checkClick(Vector2 clickPos)
+    {
+        if (collider != Physics2D.OverlapPoint(clickPos))
+        {
+            foreach(GameObject obs in obstacleTiles)
+            {
+                Vector2 pos = obs.transform.position;
+                if (pos == clickPos)
+                {
+                    Destroy(obs);
+                    obstacleTiles.Remove(obs);
+                    Debug.Log("Obstacle supprimé");
+                    break;
+                }
+            }
+        }
+        else
+        {
+            if (obstacleTiles.Count < maxObstacles)
+            {
+                GameObject newObstacle = Instantiate(obstacle);
+                newObstacle.transform.position = clickPos;
+                obstacleTiles.Add(newObstacle);
+                AstarPath.active.Scan();
+                Debug.Log("Obstacle créé");
+            }
+            else
+            {
+                Debug.Log("Nombre maximum d'obstacles placés");
+            }
+
+        }
     }
 }

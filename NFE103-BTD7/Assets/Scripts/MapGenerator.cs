@@ -12,8 +12,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject EndCell;
 
     private List<GameObject> mapTiles = new List<GameObject>();
-    private List<GameObject> pathTiles = new List<GameObject>();
-    private List<GameObject> obstaclesTiles = new List<GameObject>();
 
 
     private void generateMap()
@@ -36,7 +34,6 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        
+
     }
-    
 }
