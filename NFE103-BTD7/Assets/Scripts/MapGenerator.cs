@@ -5,15 +5,16 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject mapTile;
-    public GameObject testEnnemy;
 
     [SerializeField] private int mapWidth;
     [SerializeField] private int mapHeight;
+    public int Width => mapWidth;
+    public int Height => mapHeight;
+
     [SerializeField] private GameObject StartCell;
     [SerializeField] private GameObject EndCell;
 
     private List<GameObject> mapTiles = new List<GameObject>();
-
 
     private void generateMap()
     {
@@ -33,7 +34,6 @@ public class MapGenerator : MonoBehaviour
         generateMap();
         GameObject start = Instantiate(StartCell);
         GameObject end = Instantiate(EndCell);
-        GameObject ennemy = Instantiate(testEnnemy);
     }
 
     void Update()

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System.Linq;
 
 public class ObstaclesCreation : MonoBehaviour
 {
-
     public GameObject obstacle;
     private new BoxCollider2D collider;
 
@@ -13,10 +12,13 @@ public class ObstaclesCreation : MonoBehaviour
 
     private List<GameObject> obstacleTiles = new List<GameObject>();
 
+    public GameObject testEnnemy;
+
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
+        GameObject newEnnemy = Instantiate(testEnnemy);
     }
 
 
@@ -29,13 +31,22 @@ public class ObstaclesCreation : MonoBehaviour
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
 
-            checkClick(clickPos);
+            checkClickObstacle(clickPos);
         }
     }
 
-    private void checkClick(Vector2 clickPos)
+    
+
+    private void checkClickObstacle(Vector2 clickPos)
     {
-        //Clic sur une cellule occupée
+        MapGenerator map = GetComponent<MapGenerator>();
+
+        float y = clickPos.y;
+        float x = clickPos.x;
+
+        int counter_x = obstacleTiles.Count(item => item.transform.position.x == x);
+
+        //Cellule occupée
         if (collider != Physics2D.OverlapPoint(clickPos))
         {
             foreach (GameObject obs in obstacleTiles)
@@ -45,26 +56,36 @@ public class ObstaclesCreation : MonoBehaviour
                 {
                     Destroy(obs);
                     obstacleTiles.Remove(obs);
-                    Debug.Log("Obstacle supprimé");
+                    //Debug.Log("Obstacle supprimé");
                     break;
                 }
             }
         }
 
-        //Clic sur une cellule vide mais nbr max d'obstacles atteint
-        else if (obstacleTiles.Count > maxObstacles)
+        //Cellule libre - nombre max d'obstacles placés
+        else if ( obstacleTiles.Count > maxObstacles || counter_x == map.Height - 1 || x < 0 || y < 0 || x >= map.Width || y >= map.Height)
         {
-            Debug.Log("Nombre maximum d'obstacles placés");
+            //Debug.Log("Placement impossible");
         }
 
-        //Clic sur une cellule vide
+        //Cellule libre - OK pour placement
         else
         {
-            GameObject newObstacle = Instantiate(obstacle);
-            newObstacle.transform.position = clickPos;
-            obstacleTiles.Add(newObstacle);
-            AstarPath.active.Scan();
-            Debug.Log("Obstacle créé");
+            createObstacle(clickPos);
         }
+
     }
+
+    private void createObstacle(Vector2 clickPos)
+    {
+        MapGenerator map = GetComponent<MapGenerator>();
+
+        GameObject newObstacle = Instantiate(obstacle);
+        newObstacle.transform.position = clickPos;
+        obstacleTiles.Add(newObstacle);
+        AstarPath.active.Scan();
+        //Debug.Log("Obstacle créé");
+
+    }
+
 }
