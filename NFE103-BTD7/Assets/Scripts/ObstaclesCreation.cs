@@ -6,19 +6,17 @@ using System.Linq;
 public class ObstaclesCreation : MonoBehaviour
 {
     public GameObject obstacle;
-    private new BoxCollider2D collider;
 
-    [SerializeField] private int maxObstacles;
+    private new BoxCollider2D collider;
 
     private List<GameObject> obstacleTiles = new List<GameObject>();
 
-    public GameObject testEnnemy;
+
 
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
-        GameObject newEnnemy = Instantiate(testEnnemy);
     }
 
 
@@ -40,11 +38,7 @@ public class ObstaclesCreation : MonoBehaviour
     private void checkClickObstacle(Vector2 clickPos)
     {
         MapGenerator map = GetComponent<MapGenerator>();
-
-        float y = clickPos.y;
-        float x = clickPos.x;
-
-        int counter_x = obstacleTiles.Count(item => item.transform.position.x == x);
+        Wave wave = GetComponent<Wave>();
 
         //Cellule occupée
         if (collider != Physics2D.OverlapPoint(clickPos))
@@ -56,35 +50,32 @@ public class ObstaclesCreation : MonoBehaviour
                 {
                     Destroy(obs);
                     obstacleTiles.Remove(obs);
-                    //Debug.Log("Obstacle supprimé");
+                    Debug.Log("Obstacle supprimé");
                     break;
                 }
             }
         }
 
-        //Cellule libre - nombre max d'obstacles placés
-        else if ( obstacleTiles.Count > maxObstacles || counter_x == map.Height - 1 || x < 0 || y < 0 || x >= map.Width || y >= map.Height)
-        {
-            //Debug.Log("Placement impossible");
-        }
+        //Placement impossible (hors grille, max obstacles, chemin bloqué)
+        else if (
+            obstacleTiles.Count > wave.maxObstacles - 1 || //Max d'obstacles placés
+            obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == map.Height - 1 || //Colonne bloquée
+            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= map.Width || clickPos.y >= map.Height) // Hors de la grille
+        { Debug.Log("Placement impossible"); }
 
         //Cellule libre - OK pour placement
-        else
-        {
-            createObstacle(clickPos);
-        }
+        else if (wave.waveStarted) { Debug.Log("Vague en cours"); }
+        else { createObstacle(clickPos); }
 
     }
 
     private void createObstacle(Vector2 clickPos)
     {
-        MapGenerator map = GetComponent<MapGenerator>();
-
         GameObject newObstacle = Instantiate(obstacle);
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
         AstarPath.active.Scan();
-        //Debug.Log("Obstacle créé");
+        Debug.Log("Obstacle créé");
 
     }
 

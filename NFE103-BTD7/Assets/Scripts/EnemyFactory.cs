@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
 
-    public IEnemy GetEnemy (EnemyType type)
+    /*public IEnemy GetEnemy (EnemyType type)
     {
         switch(type)
         {
@@ -14,6 +14,6 @@ public class EnemyFactory : MonoBehaviour
             default:
                 throw new NotSupportedException();
         }
-    }
+    }*/
   
 }

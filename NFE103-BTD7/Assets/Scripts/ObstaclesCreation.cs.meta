@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
+  - wave1: {fileID: 3061826358609466106, guid: ad7d0949cd5e44b809cc2c0874c96332, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
