@@ -213,9 +213,9 @@ GameObject:
   - component: {fileID: 218452642}
   - component: {fileID: 218452641}
   - component: {fileID: 218452644}
+  - component: {fileID: 218452643}
   - component: {fileID: 218452645}
   - component: {fileID: 218452646}
-  - component: {fileID: 218452643}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -733,7 +733,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1305230281}
-        m_TargetAssemblyTypeName: Game, Assembly-CSharp
+        m_TargetAssemblyTypeName: StartWaveButton, Assembly-CSharp
         m_MethodName: StartWave
         m_Mode: 1
         m_Arguments:
@@ -791,12 +791,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1305230276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630d9a48c98304e1ab49aa6ef9b4b170, type: 3}
+  m_Script: {fileID: 11500000, guid: 7db6419356ce04b65afaf1c12272dfcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 0
-  goldCoins: 0
-  waveState: {fileID: 125649409}
 --- !u!1 &1631418525
 GameObject:
   m_ObjectHideFlags: 0

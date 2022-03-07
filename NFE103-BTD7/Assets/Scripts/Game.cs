@@ -15,13 +15,14 @@ public class Game : MonoBehaviour
 
     void Init()
     {
+        
         wave = GetComponent<Wave>();
         map = GetComponent<MapGenerator>();
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        Init();
     }
 
     // Update is called once per frame
@@ -29,11 +30,4 @@ public class Game : MonoBehaviour
     {
 
     }
-
-    public void StartWave()
-    {
-        if (!wave.waveStarted) { Debug.Log("Vague arrêtée"); }
-    }
-
-
 }
