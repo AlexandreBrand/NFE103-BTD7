@@ -5,20 +5,35 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private int lifePoints;
-    [SerializeField] private int goldCoins;
+    private static Game _instance;
 
-    public static MapGenerator map;
     public Text waveState;
     public static Wave wave;
+
+    [SerializeField] public int difficulty;
+
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else { Destroy(this); }
+    }
+
+    public static Game GetInstance()
+    {
+        return _instance;
+    }
 
 
     void Init()
     {
-        
         wave = GetComponent<Wave>();
-        map = GetComponent<MapGenerator>();
     }
+
     // Start is called before the first frame update
     void Start()
     {

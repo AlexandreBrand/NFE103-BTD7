@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    private static MapGenerator _instance;
+
     public GameObject mapTile;
 
     [SerializeField] private int mapWidth;
@@ -17,6 +19,23 @@ public class MapGenerator : MonoBehaviour
     public GameObject EndC => EndCell;
 
     private List<GameObject> mapTiles = new List<GameObject>();
+
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else { Destroy(this); }
+    }
+
+    public static MapGenerator GetInstance()
+    {
+        return _instance;
+    }
+
 
     private void generateMap()
     {
@@ -34,8 +53,8 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         generateMap();
-        GameObject start = Instantiate(StartCell);
-        GameObject end = Instantiate(EndCell);
+        Instantiate(StartCell);
+        Instantiate(EndCell);
     }
 
     void Update()

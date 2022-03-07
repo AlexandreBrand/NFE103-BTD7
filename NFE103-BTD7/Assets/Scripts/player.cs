@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartWaveButton : MonoBehaviour
+public class player : MonoBehaviour
 {
+
+    [SerializeField] private int lifePoints;
+    [SerializeField] private int goldCoins;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +19,5 @@ public class StartWaveButton : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void StartWave()
-    {
-        if (!Game.wave.waveStarted)
-        {
-            Game.wave.waveStarted = true;
-        }
     }
 }

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour , IEnemy
 {
-    public GameObject _prefabEnemy {get;set;}
-    [SerializeField] public string _name {get;set;} 
-    [SerializeField] public float _enemyHealth {get; set;}
-    [SerializeField] public float _movementSpeed  {get; set;}
-    [SerializeField] public int _killReward {get; set;}
-    [SerializeField] public int _damage {get; set;}
-
+    public GameObject PrefabEnemy;
+    [SerializeField] public float EnemyHealth {get; set;}
+    [SerializeField] public float MovementSpeed  {get; set;}
+    [SerializeField] public int KillReward {get; set;}
+    [SerializeField] public int Damage {get; set;}
+    /*
     public override string Name
     {
         get { return _name; }
@@ -40,7 +39,7 @@ public class Tank : MonoBehaviour , IEnemy
         get { return _damage; }
         set { _damage = value; }
     }
-
+    */
 
 
     // Start is called before the first frame update
@@ -49,15 +48,14 @@ public class Tank : MonoBehaviour , IEnemy
         
     }
 
-    public Tank(string name, float enemyHealth, float movementspeed, int killReward, int damage)
+    public Tank(float enemyHealth, float movementspeed, int killReward, int damage)
     {
-        _name = name;
-        _enemyHealth = enemyHealth;
-        _movementSpeed = movementspeed;
-        _killReward = killReward;
-        _damage = damage;
+        EnemyHealth = enemyHealth;
+        MovementSpeed = movementspeed;
+        KillReward = killReward;
+        Damage = damage;
 
-        GameObject newTank = Instantiate(_prefabEnemy);
+        GameObject newTank = Instantiate(PrefabEnemy);
         MapGenerator map = GetComponent<MapGenerator>();
         newTank = MapGenerator.GetInstance().StartC;
     }

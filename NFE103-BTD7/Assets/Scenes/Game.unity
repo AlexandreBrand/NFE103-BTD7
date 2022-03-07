@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaa06d0e9a2c4abe9ce9cd9c46f7ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveStarted: 0
+  enemyFactory: {fileID: 8390986000761720444, guid: dbaf9413d2bcc4faf9065816a7224e75, type: 3}
 --- !u!114 &218452646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,9 +331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630d9a48c98304e1ab49aa6ef9b4b170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 0
-  goldCoins: 0
   waveState: {fileID: 125649409}
+  difficulty: 0
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0
