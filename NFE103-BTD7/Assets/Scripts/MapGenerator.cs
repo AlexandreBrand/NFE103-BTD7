@@ -13,6 +13,8 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField] private GameObject StartCell;
     [SerializeField] private GameObject EndCell;
+    public GameObject StartC => StartCell;
+    public GameObject EndC => EndCell;
 
     private List<GameObject> mapTiles = new List<GameObject>();
 
