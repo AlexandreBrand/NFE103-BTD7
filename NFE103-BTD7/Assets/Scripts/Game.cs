@@ -7,7 +7,6 @@ public class Game : MonoBehaviour
 {
     private static Game _instance;
 
-    public Text waveState;
     public static Wave wave;
 
     [SerializeField] public int difficulty;
@@ -31,18 +30,14 @@ public class Game : MonoBehaviour
 
     void Init()
     {
-        wave = GetComponent<Wave>();
+        wave = Wave.GetInstance();
+        wave.paused = false;
+        wave.waveNumber = 0;
     }
 
-    // Start is called before the first frame update
+
     void Start()
     {
         Init();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -40,6 +40,9 @@ public class ObstaclesCreation : MonoBehaviour
 
     private void checkClickObstacle(Vector2 clickPos)
     {
+        int h = MapGenerator.GetInstance().Height;
+        int w = MapGenerator.GetInstance().Width;
+
         //Cellule occupée
         if (collider != Physics2D.OverlapPoint(clickPos))
         {
@@ -59,8 +62,8 @@ public class ObstaclesCreation : MonoBehaviour
         //Placement impossible (hors grille, max obstacles, chemin bloqué)
         else if (
             obstacleTiles.Count > Game.wave.maxObstacles - 1 || //Max d'obstacles placés
-            obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == MapGenerator.GetInstance().Height - 1 || //Colonne bloquée
-            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= MapGenerator.GetInstance().Width || clickPos.y >= MapGenerator.GetInstance().Height) // Hors de la grille
+            obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
+            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { /*Debug.Log("Placement impossible");*/  }
 
         //Cellule libre - OK pour placement
@@ -74,6 +77,6 @@ public class ObstaclesCreation : MonoBehaviour
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
         error_msg.text = "Obstacle créé";
-
+        AstarPath.active.Scan();
     }
 }

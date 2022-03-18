@@ -53,8 +53,6 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         generateMap();
-        Instantiate(StartCell);
-        Instantiate(EndCell);
     }
 
     void Update()
