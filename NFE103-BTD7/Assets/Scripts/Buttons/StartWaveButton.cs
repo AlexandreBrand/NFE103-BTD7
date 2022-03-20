@@ -4,23 +4,12 @@ using UnityEngine;
 
 public class StartWaveButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StartWave()
     {
         //Si pas de vague en cours
         if (!Game.wave.waveStarted)
         {
+            Debug.Log(Game.wave.waveStarted);
             //Démarrer vague
             Game.wave.waveStarted = true;
             Game.wave.waveStateText.text = "Pause";

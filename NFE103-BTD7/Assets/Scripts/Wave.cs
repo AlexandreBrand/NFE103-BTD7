@@ -10,17 +10,13 @@ public class Wave : MonoBehaviour
     public int maxObstacles { get; set; }
     public bool waveStarted { get; set; }
     public int monstersAmount { get; set; }
+    public int monstersLeft { get; set; }
     public int waveNumber;
     public bool paused;
     public Text waveStateText;
 
+    public GameObject ennemy;
 
-    public GameObject enemyFactory;
-
-    public void Init()
-    {
-        waveStarted = false;
-    }
 
     void Awake()
     {
@@ -32,29 +28,39 @@ public class Wave : MonoBehaviour
         else { Destroy(this); }
     }
 
-    public static Wave GetInstance()
+    private void Start()
     {
-        return _instance;
-    }
-
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-        int diff = Game.GetInstance().difficulty;
-        maxObstacles = 30;
-
-        GameObject newEnemy = Instantiate(enemyFactory);
+        GameObject newEnemy = Instantiate(ennemy);
         newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
-
-        AstarPath.active.Scan();
-
+        monstersLeft = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        endWave(300);
     }
 
+    public static Wave GetInstance() { return _instance; }
+
+    public void loseLife(int dmg)
+    {
+        //Si ennemi arrive à la cellule de fin alors
+        Player.GetInstance().LifePoints -= dmg;
+    }
+
+    public void endWave(int WaveEndBounty)
+    {
+        //Plus de points de vie
+        if(Player.GetInstance().LifePoints == 0)
+        {
+            Game.GetInstance().Lost();
+        }
+
+        //Tous les ennemis battus
+        else if(monstersLeft == 0)
+        {
+            waveStarted = false;
+            Player.GetInstance().GoldCoins += WaveEndBounty;
+        }
+    }
 }

@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
-    [SerializeField] private int lifePoints;
-    [SerializeField] private int goldCoins;
+    private static Player _instance;
 
+    public int LifePoints { get; set; }
+    public int GoldCoins { get; set; }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else { Destroy(this); }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static Player GetInstance() { return _instance; }
 }
