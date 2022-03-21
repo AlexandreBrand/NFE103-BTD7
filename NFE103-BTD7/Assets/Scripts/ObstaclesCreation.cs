@@ -10,11 +10,9 @@ public class ObstaclesCreation : MonoBehaviour
 
     private new BoxCollider2D collider;
 
-    private List<GameObject> obstacleTiles = new List<GameObject>();
+    public static List<GameObject> obstacleTiles = new List<GameObject>();
 
     public Text error_msg;
-
-
 
     // Start is called before the first frame update
     void Start()
