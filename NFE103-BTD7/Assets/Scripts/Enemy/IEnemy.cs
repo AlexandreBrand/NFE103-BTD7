@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnemy
+public abstract class IEnemy : MonoBehaviour
 {
-    float EnemyHealth {get;}
-    float MovementSpeed  {get; }
-    int KillReward {get;}
-    int Damage {get;}
+    [SerializeField] public float EnemyHealth;
+    [SerializeField] public float MovementSpeed;
+    [SerializeField] public int KillReward;
+    [SerializeField] public int Damage;
 }

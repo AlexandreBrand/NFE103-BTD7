@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tank : MonoBehaviour 
+public class Tank : IEnemy
 {
-    [SerializeField] public float EnemyHealth;
-    [SerializeField] public float MovementSpeed;
-    [SerializeField] public int KillReward;
-    [SerializeField] public int Damage;
 
 
 
@@ -19,7 +15,7 @@ public class Tank : MonoBehaviour
 
     public Tank()
     {
-   
+       
     }
 
 

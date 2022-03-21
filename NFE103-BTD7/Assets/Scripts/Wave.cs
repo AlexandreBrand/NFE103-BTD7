@@ -31,7 +31,9 @@ public class Wave : MonoBehaviour
 
     private void Start()
     {
-        GameObject newEnemy = Instantiate(ennemy);
+        //GameObject newEnemy = Instantiate(ennemy);
+        Debug.Log("start wave");
+        GameObject newEnemy = enemyFactory.GetEnemy(EnemyType.Tank);
         newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
         monstersLeft = 1;
     }

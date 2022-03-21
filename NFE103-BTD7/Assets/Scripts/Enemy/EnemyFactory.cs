@@ -6,9 +6,11 @@ public class EnemyFactory : MonoBehaviour
     public GameObject prefabTank;
     public GameObject GetEnemy (EnemyType type)
     {
-        switch(type)
+        Debug.Log("start getEnemy");
+        switch (type)
         {
             case EnemyType.Tank:
+                Debug.Log("create tank");
                 GameObject tank = Instantiate(prefabTank);
                 return tank;
                 

@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 218452645}
   - component: {fileID: 218452646}
   - component: {fileID: 218452647}
+  - component: {fileID: 218452648}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -319,11 +320,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaa06d0e9a2c4abe9ce9cd9c46f7ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxObstacles: 0
+  waveStarted: 0
+  monstersAmount: 0
+  monstersLeft: 0
   waveNumber: 0
   paused: 0
   waveEndBounty: 0
   waveStateText: {fileID: 125649409}
-  ennemy: {fileID: 8390986000761720444, guid: dbaf9413d2bcc4faf9065816a7224e75, type: 3}
+  ennemy: {fileID: 1364797109953621247, guid: c0d4d6a92db22834fb16ac86d0a93257, type: 3}
   enemyFactory: {fileID: 0}
 --- !u!114 &218452646
 MonoBehaviour:
@@ -349,6 +354,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001247fcec7254b6f9e7c651ff51ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &218452648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218452640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7174e54f5cd10af488f04e4c66e2b211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabTank: {fileID: 1364797109953621247, guid: c0d4d6a92db22834fb16ac86d0a93257, type: 3}
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0

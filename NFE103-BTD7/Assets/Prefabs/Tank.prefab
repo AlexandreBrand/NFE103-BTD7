@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 50
-  MovementSpeed: 5
+  MovementSpeed: 222
   KillReward: 10
   Damage: 2
 --- !u!114 &-247388991901713278
@@ -96,7 +96,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 2
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
