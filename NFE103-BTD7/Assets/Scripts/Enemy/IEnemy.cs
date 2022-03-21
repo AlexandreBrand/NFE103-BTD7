@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IEnemy
 {
-    float EnemyHealth {get; set;}
-    float MovementSpeed  {get; set;}
-    int KillReward {get; set;}
-    int Damage {get; set;}
+    float EnemyHealth {get;}
+    float MovementSpeed  {get; }
+    int KillReward {get;}
+    int Damage {get;}
 }

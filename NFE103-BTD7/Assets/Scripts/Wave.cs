@@ -7,10 +7,10 @@ public class Wave : MonoBehaviour
 {
     private static Wave _instance;
 
-    public int maxObstacles { get; set; }
-    public bool waveStarted { get; set; }
-    public int monstersAmount { get; set; }
-    public int monstersLeft { get; set; }
+    public int maxObstacles;
+    public bool waveStarted;
+    public int monstersAmount;
+    public int monstersLeft;
     public int waveNumber;
     public bool paused;
     public int waveEndBounty;
