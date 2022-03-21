@@ -49,6 +49,6 @@ public class Game : MonoBehaviour
 
     public void Lost()
     {
-        //TODO : fin de partie
+        //TODO fin de partie
     }
 }

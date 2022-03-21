@@ -13,10 +13,11 @@ public class Wave : MonoBehaviour
     public int monstersLeft { get; set; }
     public int waveNumber;
     public bool paused;
+    public int waveEndBounty;
     public Text waveStateText;
 
     public GameObject ennemy;
-
+    public EnemyFactory enemyFactory;
 
     void Awake()
     {
@@ -37,16 +38,12 @@ public class Wave : MonoBehaviour
 
     private void Update()
     {
-        endWave(300);
+        endWave(waveEndBounty);
     }
 
     public static Wave GetInstance() { return _instance; }
 
-    public void loseLife(int dmg)
-    {
-        //Si ennemi arrive à la cellule de fin alors
-        Player.GetInstance().LifePoints -= dmg;
-    }
+    public void loseLife(int dmg) { Player.GetInstance().LifePoints -= dmg; }
 
     public void endWave(int WaveEndBounty)
     {
@@ -61,6 +58,14 @@ public class Wave : MonoBehaviour
         {
             waveStarted = false;
             Player.GetInstance().GoldCoins += WaveEndBounty;
+        }
+    }
+
+    public void createEnemies()
+    {
+        for (int i = 0; i < monstersAmount; i++)
+        {
+            //instancier monstres
         }
     }
 }
