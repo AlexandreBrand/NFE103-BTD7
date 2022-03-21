@@ -18,29 +18,43 @@ public class Wave : MonoBehaviour
 
     public GameObject ennemy;
     public EnemyFactory enemyFactory;
+    private float lastTimeSpawn;
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else { Destroy(this); }
+        //if (_instance == null)
+        //{
+        //    _instance = this;
+        //    DontDestroyOnLoad(this.gameObject);
+        //}
+        //else { Destroy(this); }
+        _instance = this;
     }
 
     private void Start()
     {
         //GameObject newEnemy = Instantiate(ennemy);
-        Debug.Log("start wave");
-        GameObject newEnemy = enemyFactory.GetEnemy(EnemyType.Tank);
-        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
-        monstersLeft = 1;
+
+
+        //GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Tank);
+        //newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
+        //monstersLeft = 1;
+        lastTimeSpawn = Time.time;
     }
 
     private void Update()
     {
         endWave(waveEndBounty);
+       
+        double time = Time.time - lastTimeSpawn;
+        Debug.Log(time);
+        if (0.2f < time)
+        {
+                GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Tank);
+                newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
+                Debug.Log(newEnemy);
+                lastTimeSpawn = Time.time;           
+        }
     }
 
     public static Wave GetInstance() { return _instance; }

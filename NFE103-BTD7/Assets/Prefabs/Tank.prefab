@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 50
-  MovementSpeed: 222
+  MovementSpeed: 1
   KillReward: 10
   Damage: 2
 --- !u!114 &-247388991901713278

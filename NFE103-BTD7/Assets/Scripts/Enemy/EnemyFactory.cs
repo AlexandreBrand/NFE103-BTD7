@@ -4,14 +4,17 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
     public GameObject prefabTank;
-    public GameObject GetEnemy (EnemyType type)
+    private static EnemyFactory Instance;
+    private void Awake()
     {
-        Debug.Log("start getEnemy");
+        Instance = this;
+    }
+    public static GameObject GetEnemy(EnemyType type)
+    {
         switch (type)
         {
             case EnemyType.Tank:
-                Debug.Log("create tank");
-                GameObject tank = Instantiate(prefabTank);
+                GameObject tank = Instantiate(Instance.prefabTank);
                 return tank;
                 
             case EnemyType.Bowman:

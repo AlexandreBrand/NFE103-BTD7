@@ -216,7 +216,6 @@ GameObject:
   - component: {fileID: 218452643}
   - component: {fileID: 218452645}
   - component: {fileID: 218452646}
-  - component: {fileID: 218452647}
   - component: {fileID: 218452648}
   m_Layer: 0
   m_Name: MapGenerator
@@ -340,18 +339,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 630d9a48c98304e1ab49aa6ef9b4b170, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &218452647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218452640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001247fcec7254b6f9e7c651ff51ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &218452648
