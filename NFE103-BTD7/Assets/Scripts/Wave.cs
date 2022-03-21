@@ -7,6 +7,7 @@ public class Wave : MonoBehaviour
 {
     private static Wave _instance;
 
+    public int maxTowers;
     public int maxObstacles;
     public bool waveStarted;
     public int monstersAmount;
