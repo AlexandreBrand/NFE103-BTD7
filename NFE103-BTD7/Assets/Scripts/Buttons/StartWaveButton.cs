@@ -9,10 +9,9 @@ public class StartWaveButton : MonoBehaviour
         //Si pas de vague en cours
         if (!Game.wave.waveStarted)
         {
-            Debug.Log(Game.wave.waveStarted);
             //Démarrer vague
             Game.wave.waveStarted = true;
-            Game.wave.waveStateText.text = "Pause";
+            Game.wave.waveStateText.text = "PAUSE";
             Game.wave.waveNumber++;
         }
         //Si vague en cours
@@ -23,14 +22,14 @@ public class StartWaveButton : MonoBehaviour
             {
                 Time.timeScale = 0;
                 Game.wave.paused = true;
-                Game.wave.waveStateText.text = "Resume";
+                Game.wave.waveStateText.text = "RESUME";
             }
             //Reprendre
             else if (Game.wave.paused)
             {
                 Time.timeScale = 1;
                 Game.wave.paused = false;
-                Game.wave.waveStateText.text = "Pause";
+                Game.wave.waveStateText.text = "PAUSE";
             }
             
         }

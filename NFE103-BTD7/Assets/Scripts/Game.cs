@@ -33,7 +33,8 @@ public class Game : MonoBehaviour
 
         wave.waveStarted = false;
         wave.paused = false;
-        wave.waveNumber = 0;
+        wave.waveNumber = 1;
+        wave.waveLvL.text = wave.waveNumber.ToString();
         wave.maxObstacles = 30;
 
         player.LifePoints = 100;
@@ -44,7 +45,6 @@ public class Game : MonoBehaviour
     void Start()
     {
         Init();
-        Debug.Log(wave.waveStarted);
     }
 
     public void Lost()

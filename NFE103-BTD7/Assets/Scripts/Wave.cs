@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Wave : MonoBehaviour
 {
@@ -15,9 +16,8 @@ public class Wave : MonoBehaviour
     public bool paused;
     public int waveEndBounty;
     public Text waveStateText;
+    public TextMeshProUGUI waveLvL;
 
-    public GameObject ennemy;
-    public EnemyFactory enemyFactory;
 
     void Awake()
     {
@@ -32,9 +32,6 @@ public class Wave : MonoBehaviour
     private void Start()
     {
         //GameObject newEnemy = Instantiate(ennemy);
-        Debug.Log("start wave");
-        GameObject newEnemy = enemyFactory.GetEnemy(EnemyType.Tank);
-        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
         monstersLeft = 1;
     }
 
@@ -46,6 +43,7 @@ public class Wave : MonoBehaviour
     public static Wave GetInstance() { return _instance; }
 
     public void loseLife(int dmg) { Player.GetInstance().LifePoints -= dmg; }
+
 
     public void endWave(int WaveEndBounty)
     {
@@ -59,6 +57,7 @@ public class Wave : MonoBehaviour
         else if(monstersLeft == 0)
         {
             waveStarted = false;
+            waveStateText.text = "START";
             Player.GetInstance().GoldCoins += WaveEndBounty;
         }
     }
