@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using TMPro;
 
 public class ObstaclesCreation : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ObstaclesCreation : MonoBehaviour
 
     public static List<GameObject> obstacleTiles = new List<GameObject>();
 
-    public Text error_msg;
+    public TextMeshProUGUI error_msg;
 
     // Start is called before the first frame update
     void Start()

@@ -15,7 +15,7 @@ public class Wave : MonoBehaviour
     public int waveNumber;
     public bool paused;
     public int waveEndBounty;
-    public Text waveStateText;
+    public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
 
 
