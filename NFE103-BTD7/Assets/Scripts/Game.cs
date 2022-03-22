@@ -12,12 +12,12 @@ public class Game : MonoBehaviour
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            //DontDestroyOnLoad(this.gameObject);
-        }
-        else { Destroy(this); }
+        //if (_instance == null)
+        //{
+        //    _instance = this;
+        //    //DontDestroyOnLoad(this.gameObject);
+        //}
+        //else { Destroy(this); }
     }
 
     public static Game GetInstance()
@@ -28,6 +28,7 @@ public class Game : MonoBehaviour
 
     void Init()
     {
+        //Wave wave = new Wave();
         wave = Wave.GetInstance();
         player = Player.GetInstance();
 
@@ -36,6 +37,7 @@ public class Game : MonoBehaviour
         wave.waveNumber = 1;
         wave.waveLvL.text = wave.waveNumber.ToString();
         wave.maxObstacles = 30;
+        wave.monstersAmount = 3;
 
         player.LifePoints = 100;
         player.GoldCoins = 300;
