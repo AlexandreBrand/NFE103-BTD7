@@ -27,7 +27,8 @@ public class ObstaclesCreation : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 clickPos = new Vector2(
+            Vector2 clickPos;
+            clickPos = new Vector2(
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
 
@@ -52,7 +53,7 @@ public class ObstaclesCreation : MonoBehaviour
                 {
                     Destroy(obs);
                     obstacleTiles.Remove(obs);
-                    error_msg.text = "Obstacle supprimé";
+                    error_msg.text = "Obstacle supprime";
                     break;
                 }
                 else
@@ -79,7 +80,7 @@ public class ObstaclesCreation : MonoBehaviour
         GameObject newObstacle = Instantiate(obstacle);
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
-        error_msg.text = "Obstacle créé";
+        error_msg.text = "Obstacle cree";
         AstarPath.active.Scan();
     }
 }
