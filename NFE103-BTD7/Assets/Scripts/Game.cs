@@ -35,7 +35,7 @@ public class Game : MonoBehaviour
         wave.waveStarted = false;
         wave.paused = false;
         wave.waveNumber = 1;
-        wave.waveLvL.text = wave.waveNumber.ToString();
+        wave.waveLvL.text = "LvL " + wave.waveNumber.ToString();
         wave.maxObstacles = 30;
         wave.monstersAmount = 3;
 

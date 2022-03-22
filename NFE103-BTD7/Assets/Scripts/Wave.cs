@@ -22,12 +22,6 @@ public class Wave : MonoBehaviour
     void Awake()
     {
         _instance = this;
-        //if (_instance == null)
-        //{
-        //    _instance = this;
-        //    //DontDestroyOnLoad(this.gameObject);
-        //}
-        //else { Destroy(this); }
     }
 
     private void Start()
@@ -52,6 +46,7 @@ public class Wave : MonoBehaviour
     }
 
     public static Wave GetInstance() { return _instance; }
+
 
     public void loseLife(int dmg) { Player.GetInstance().LifePoints -= dmg; }
 

@@ -14,12 +14,14 @@ public class ObstaclesCreation : MonoBehaviour
     public static List<GameObject> obstacleTiles = new List<GameObject>();
 
     public TextMeshProUGUI error_msg;
+    public TextMeshProUGUI obs_restants;
 
     // Start is called before the first frame update
     void Start()
     {
+        obs_restants.text = "Obstacles restants : " + Wave.GetInstance().maxObstacles.ToString();
         collider = GetComponent<BoxCollider2D>();
-        error_msg.text = "";
+        error_msg.text = "Placez des obstacles";
     }
 
 
@@ -34,7 +36,10 @@ public class ObstaclesCreation : MonoBehaviour
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
 
             checkClickObstacle(clickPos);
+            obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
         }
+
+        if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
     }
 
     
@@ -81,7 +86,7 @@ public class ObstaclesCreation : MonoBehaviour
         GameObject newObstacle = Instantiate(obstacle);
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
-        error_msg.text = "Obstacle cree";
+        error_msg.text = "Obstacle place";
         AstarPath.active.Scan();
     }
 }
