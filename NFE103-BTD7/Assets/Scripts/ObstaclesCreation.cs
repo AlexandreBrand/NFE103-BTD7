@@ -10,11 +10,9 @@ public class ObstaclesCreation : MonoBehaviour
 
     private new BoxCollider2D collider;
 
-    private List<GameObject> obstacleTiles = new List<GameObject>();
+    public static List<GameObject> obstacleTiles = new List<GameObject>();
 
     public Text error_msg;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -49,12 +47,16 @@ public class ObstaclesCreation : MonoBehaviour
             foreach (GameObject obs in obstacleTiles)
             {
                 Vector2 pos = obs.transform.position;
-                if (pos == clickPos)
+                if (pos == clickPos && !Game.wave.waveStarted)
                 {
                     Destroy(obs);
                     obstacleTiles.Remove(obs);
                     error_msg.text = "Obstacle supprimé";
                     break;
+                }
+                else
+                {
+                    error_msg.text = "Vague en cours";
                 }
             }
         }
