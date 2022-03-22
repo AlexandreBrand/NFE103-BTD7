@@ -13,6 +13,7 @@ public class StartWaveButton : MonoBehaviour
             Game.wave.waveStarted = true;
             Game.wave.waveStateText.text = "PAUSE";
             Game.wave.waveNumber++;
+            
         }
         //Si vague en cours
         else if (Game.wave.waveStarted)

@@ -1536,6 +1536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabTank: {fileID: 1364797109953621247, guid: c0d4d6a92db22834fb16ac86d0a93257, type: 3}
+  PrefabBloodthirsty: {fileID: 77952005857666816, guid: 9667e30339f90b4439ebe8759307b983, type: 3}
 --- !u!483693784 &218452649
 TilemapRenderer:
   m_ObjectHideFlags: 0

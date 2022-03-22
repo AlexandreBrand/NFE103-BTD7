@@ -17,27 +17,38 @@ public class Wave : MonoBehaviour
     public int waveEndBounty;
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
-
+    private float lastTimeSpawn;
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            //DontDestroyOnLoad(this.gameObject);
-        }
-        else { Destroy(this); }
+        _instance = this;
+        //if (_instance == null)
+        //{
+        //    _instance = this;
+        //    //DontDestroyOnLoad(this.gameObject);
+        //}
+        //else { Destroy(this); }
     }
 
     private void Start()
     {
+        waveStarted = false;
         //GameObject newEnemy = Instantiate(ennemy);
-        monstersLeft = 1;
+        monstersLeft = 0;
+        lastTimeSpawn = Time.time;
     }
 
     private void Update()
     {
         endWave(waveEndBounty);
+
+        double time = Time.time - lastTimeSpawn;
+        if (waveStarted == true && monstersAmount > monstersLeft && 0.2f < time)
+        {
+            createEnemy();    
+            lastTimeSpawn = Time.time;
+            monstersLeft ++;
+        }
     }
 
     public static Wave GetInstance() { return _instance; }
@@ -54,7 +65,7 @@ public class Wave : MonoBehaviour
         }
 
         //Tous les ennemis battus
-        else if(monstersLeft == 0)
+        else if(monstersLeft == -1)
         {
             waveStarted = false;
             waveStateText.text = "START";
@@ -62,11 +73,9 @@ public class Wave : MonoBehaviour
         }
     }
 
-    public void createEnemies()
+    public void createEnemy()
     {
-        for (int i = 0; i < monstersAmount; i++)
-        {
-            //instancier monstres
-        }
+        GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Bloodthirsty);
+        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
     }
 }
