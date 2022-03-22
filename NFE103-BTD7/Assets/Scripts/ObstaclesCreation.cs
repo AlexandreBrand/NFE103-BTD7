@@ -19,6 +19,7 @@ public class ObstaclesCreation : MonoBehaviour
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
+        error_msg.text = "";
     }
 
 
