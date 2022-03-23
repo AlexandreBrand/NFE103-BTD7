@@ -70,7 +70,7 @@ public class Wave : MonoBehaviour
 
     public void createEnemy()
     {
-        GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Bloodthirsty);
+        GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Knight);
         newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
     }
 }

@@ -5,6 +5,7 @@ public class EnemyFactory : MonoBehaviour
 {
     public GameObject prefabTank; 
     public GameObject PrefabBloodthirsty;
+    public GameObject PrefabKnight;
     private static EnemyFactory Instance;
     private void Awake()
     {
@@ -22,7 +23,9 @@ public class EnemyFactory : MonoBehaviour
                 GameObject bloodthirsty = Instantiate(Instance.PrefabBloodthirsty);
                 return bloodthirsty;
 
-
+            case EnemyType.Knight:
+                GameObject knight = Instantiate(Instance.PrefabKnight);
+                return knight;
 
             default:
                 throw new Exception();
