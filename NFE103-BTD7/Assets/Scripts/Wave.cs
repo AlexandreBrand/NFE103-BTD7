@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Wave : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class Wave : MonoBehaviour
 
     public int maxObstacles;
     public bool waveStarted;
+    public bool paused;
+    public bool quitMenu;
     public int monstersAmount;
     public int monstersLeft;
     public int waveNumber;
-    public bool paused;
     public int waveEndBounty;
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
@@ -27,7 +29,7 @@ public class Wave : MonoBehaviour
     private void Start()
     {
         waveStarted = false;
-        //GameObject newEnemy = Instantiate(ennemy);
+        quitMenu = false;
         monstersLeft = 0;
         lastTimeSpawn = Time.time;
     }

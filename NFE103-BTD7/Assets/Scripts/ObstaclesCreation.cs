@@ -59,7 +59,7 @@ public class ObstaclesCreation : MonoBehaviour
                 {
                     Destroy(obs);
                     obstacleTiles.Remove(obs);
-                    error_msg.text = "Obstacle supprime";
+                    error_msg.text = "Obstacle supprimé";
                     break;
                 }
                 else
@@ -75,9 +75,10 @@ public class ObstaclesCreation : MonoBehaviour
             obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
             clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { /*Debug.Log("Placement impossible");*/  }
+        else if (Game.wave.waveStarted) { error_msg.text = "Vague en cours"; }
+        else if (Game.wave.quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
 
         //Cellule libre - OK pour placement
-        else if (Game.wave.waveStarted) { error_msg.text = "Vague en cours"; }
         else { createObstacle(clickPos); }
     }
 
@@ -86,7 +87,7 @@ public class ObstaclesCreation : MonoBehaviour
         GameObject newObstacle = Instantiate(obstacle);
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
-        error_msg.text = "Obstacle place";
+        error_msg.text = "Obstacle placé";
         AstarPath.active.Scan();
     }
 }
