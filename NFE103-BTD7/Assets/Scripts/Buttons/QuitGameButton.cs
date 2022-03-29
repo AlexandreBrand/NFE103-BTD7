@@ -19,7 +19,7 @@ public class QuitGameButton : MonoBehaviour
     public void ConfirmQuitGame()
     {
         Game.wave.endWave(0);
-        SceneManager.LoadScene("MenuStart");
+        SceneManager.LoadScene("Menu");
     }
 
     public void CancelQuitGame()
