@@ -71,12 +71,13 @@ public class ObstaclesCreation : MonoBehaviour
 
         //Placement impossible (hors grille, max obstacles, chemin bloqué)
         else if (
-            obstacleTiles.Count > Game.wave.maxObstacles - 1 || //Max d'obstacles placés
+            obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || //Max d'obstacles placés
             obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
             clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { /*Debug.Log("Placement impossible");*/  }
-        else if (Game.wave.waveStarted) { error_msg.text = "Vague en cours"; }
-        else if (Game.wave.quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
+        else if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
+        else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
+        else if (Wave.GetInstance().diff_select) { /*Debug.Log("Menu Sélection de la difficulté actif");*/}
 
         //Cellule libre - OK pour placement
         else { createObstacle(clickPos); }

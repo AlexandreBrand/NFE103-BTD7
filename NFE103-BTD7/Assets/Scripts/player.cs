@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        LifePoints = 0;
+        GoldCoins = 0;
+    }
+
+    private void Update()
+    {
         Life.text = LifePoints.ToString();
         Gold.text = GoldCoins.ToString();
     }

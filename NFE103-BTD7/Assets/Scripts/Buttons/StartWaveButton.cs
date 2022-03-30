@@ -6,31 +6,33 @@ public class StartWaveButton : MonoBehaviour
 {
     public void StartWave()
     {
+        Wave wave = Wave.GetInstance();
+
         //Si pas de vague en cours
-        if (!Game.wave.waveStarted)
+        if (!wave.waveStarted)
         {
             //Démarrer vague
-            Game.wave.waveStarted = true;
-            Game.wave.waveStateText.text = "PAUSE";
-            Game.wave.waveNumber++;
+            wave.waveStarted = true;
+            wave.waveStateText.text = "PAUSE";
+            wave.waveNumber++;
             
         }
         //Si vague en cours
-        else if (Game.wave.waveStarted)
+        else if (wave.waveStarted)
         {
             //Mettre en pause
-            if (!Game.wave.paused)
+            if (!wave.paused)
             {
                 Time.timeScale = 0;
-                Game.wave.paused = true;
-                Game.wave.waveStateText.text = "RESUME";
+                wave.paused = true;
+                wave.waveStateText.text = "RESUME";
             }
             //Reprendre
-            else if (Game.wave.paused)
+            else if (Wave.GetInstance().paused)
             {
                 Time.timeScale = 1;
-                Game.wave.paused = false;
-                Game.wave.waveStateText.text = "PAUSE";
+                wave.paused = false;
+                wave.waveStateText.text = "PAUSE";
             }
             
         }

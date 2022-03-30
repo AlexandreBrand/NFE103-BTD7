@@ -9,17 +9,22 @@ public class Wave : MonoBehaviour
 {
     private static Wave _instance;
 
-    public int maxObstacles;
+    
     public bool waveStarted;
     public bool paused;
     public bool quitMenu;
+
+    public int waveNumber;
+    public double maxObstacles;
+    public int waveEndBounty;
+    public bool diff_select;
+
     public int monstersAmount;
     public int monstersLeft;
-    public int waveNumber;
-    public int waveEndBounty;
+    
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
-    private float lastTimeSpawn;
+    public float lastTimeSpawn;
 
     void Awake()
     {
@@ -29,14 +34,25 @@ public class Wave : MonoBehaviour
     private void Start()
     {
         waveStarted = false;
+        paused = false;
         quitMenu = false;
+
+        waveNumber = 0;
+        maxObstacles = 0;
+        waveEndBounty = 0;
+        diff_select = true;
+
         monstersLeft = 0;
         lastTimeSpawn = Time.time;
+        waveLvL.text = "LvL " + waveNumber.ToString();
+        monstersAmount = 3;
+
     }
 
     private void Update()
     {
-        endWave(waveEndBounty);
+        //A appeler quand un ennemy meurs ou arrive à la cellule de fin
+        //endWave(waveEndBounty);
 
         double time = Time.time - lastTimeSpawn;
         if (waveStarted == true && monstersAmount > monstersLeft && 0.2f < time)
@@ -62,7 +78,7 @@ public class Wave : MonoBehaviour
         }
 
         //Tous les ennemis battus
-        else if(monstersLeft == -1)
+        else if(monstersLeft == 0)
         {
             waveStarted = false;
             waveStateText.text = "START";
