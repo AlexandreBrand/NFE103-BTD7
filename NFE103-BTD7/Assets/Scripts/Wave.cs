@@ -19,10 +19,15 @@ public class Wave : MonoBehaviour
     public int waveEndBounty;
     public bool diff_select;
 
+    public int monsterNbr;
     public int tanksNbr;
+    public int tanksLeft;
     public int assassinsNbr;
+    public int assassinsLeft;
     public int knightNbr;
+    public int knightLeft;
     public int monstersLeft;
+    
     
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
@@ -45,8 +50,12 @@ public class Wave : MonoBehaviour
         diff_select = true;
 
         monstersLeft = 0;
+        assassinsLeft = 0;
+        knightLeft = 0;
+        tanksLeft = 0;
         lastTimeSpawn = Time.time;
         waveLvL.text = "LvL 0";
+        monsterNbr = tanksNbr+knightNbr+assassinsNbr;
         tanksNbr = 1;
         assassinsNbr = 1;
         knightNbr = 1;
@@ -56,36 +65,95 @@ public class Wave : MonoBehaviour
     private void Update()
     {
         waveLvL.text = "LvL " + waveNumber.ToString();
+        monsterNbr = tanksNbr + knightNbr + assassinsNbr;
         //A appeler quand un ennemy meurs ou arrive à la cellule de fin
         //endWave(waveEndBounty);
-        createEnemy();    
+
+        double time = Time.time - lastTimeSpawn;
+        if (waveStarted && monsterNbr > monstersLeft && 0.6f < time)
+        {
+            EnemySpawner();
+        }
+        
     }
 
     public static Wave GetInstance() { return _instance; }
 
-    public void createEnemy()
-    {
-        double time = Time.time - lastTimeSpawn;
 
+    public void EnemySpawner()
+    {
         int rand = Random.Range(1,4);
-        EnemyType type;
 
         switch (rand)
         {
-            case 1: type = EnemyType.Knight; break;
-            case 2: type = EnemyType.Bloodthirsty; break;
-            case 3: type = EnemyType.Tank; break;
-            default: type = EnemyType.Knight; break;
+            case 1:
+                if(assassinsLeft < assassinsNbr)
+                {
+                    CreateEnemy(EnemyType.Bloodthirsty);
+                    assassinsLeft++;
+                }
+                break;
+
+            case 2:
+                if (knightLeft < knightNbr)
+                {
+                    CreateEnemy(EnemyType.Knight);
+                    knightLeft++;
+                }
+                break;
+            case 3:
+                if (tanksLeft < tanksNbr)
+                {
+                    CreateEnemy(EnemyType.Tank);
+                    tanksLeft++;
+                }
+                break;
+
+            default:
+                if (assassinsLeft < assassinsNbr)
+                {
+                    CreateEnemy(EnemyType.Bloodthirsty);
+                    assassinsLeft++;
+                }
+                break;
         }
 
-        if (waveStarted && tanksNbr+assassinsNbr+knightNbr > monstersLeft && 0.6f < time)
+        
+    }
+
+    public void CreateEnemy(EnemyType type)
+    {
+        GameObject newEnemy = EnemyFactory.GetEnemy(type);
+        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
+        lastTimeSpawn = Time.time;
+        monstersLeft++;
+    }
+
+    public void StartWave()
+    {
+        waveStarted = true;
+        waveStateText.text = "PAUSE";
+        waveNumber++;
+    }
+
+    public void PauseOrResumeWave()
+    {
+        //Mettre en pause
+        if (!paused)
         {
-            GameObject newEnemy = EnemyFactory.GetEnemy(type);
-            newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
-            lastTimeSpawn = Time.time;
-            monstersLeft++;
+            Time.timeScale = 0;
+            paused = true;
+            waveStateText.text = "RESUME";
+        }
+        //Reprendre
+        else if (Wave.GetInstance().paused)
+        {
+            Time.timeScale = 1;
+            paused = false;
+            waveStateText.text = "PAUSE";
         }
     }
+
 
     public void endWave(int WaveEndBounty)
     {
