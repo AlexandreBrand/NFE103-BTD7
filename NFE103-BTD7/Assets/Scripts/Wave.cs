@@ -19,7 +19,9 @@ public class Wave : MonoBehaviour
     public int waveEndBounty;
     public bool diff_select;
 
-    public int monstersAmount;
+    public int tanksNbr;
+    public int assassinsNbr;
+    public int knightNbr;
     public int monstersLeft;
     
     public TextMeshProUGUI waveStateText;
@@ -45,7 +47,9 @@ public class Wave : MonoBehaviour
         monstersLeft = 0;
         lastTimeSpawn = Time.time;
         waveLvL.text = "LvL 0";
-        monstersAmount = 3;
+        tanksNbr = 1;
+        assassinsNbr = 1;
+        knightNbr = 1;
 
     }
 
@@ -62,9 +66,21 @@ public class Wave : MonoBehaviour
     public void createEnemy()
     {
         double time = Time.time - lastTimeSpawn;
-        if (waveStarted && monstersAmount > monstersLeft && 0.2f < time)
+
+        int rand = Random.Range(1,4);
+        EnemyType type;
+
+        switch (rand)
         {
-            GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Knight);
+            case 1: type = EnemyType.Knight; break;
+            case 2: type = EnemyType.Bloodthirsty; break;
+            case 3: type = EnemyType.Tank; break;
+            default: type = EnemyType.Knight; break;
+        }
+
+        if (waveStarted && tanksNbr+assassinsNbr+knightNbr > monstersLeft && 0.6f < time)
+        {
+            GameObject newEnemy = EnemyFactory.GetEnemy(type);
             newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
             lastTimeSpawn = Time.time;
             monstersLeft++;

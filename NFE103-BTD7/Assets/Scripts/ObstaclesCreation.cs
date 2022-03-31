@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
+using Pathfinding;
 
 public class ObstaclesCreation : MonoBehaviour
 {
@@ -46,6 +47,9 @@ public class ObstaclesCreation : MonoBehaviour
         int h = MapGenerator.GetInstance().Height;
         int w = MapGenerator.GetInstance().Width;
 
+        //GraphNode node1 = AstarPath.active.GetNearest(MapGenerator.GetInstance().StartC.transform.position, NNConstraint.Default).node;
+        //GraphNode node2 = AstarPath.active.GetNearest(MapGenerator.GetInstance().EndC.transform.position, NNConstraint.Default).node;
+
         //Cellule occupée
         if (collider != Physics2D.OverlapPoint(clickPos))
         {
@@ -74,9 +78,17 @@ public class ObstaclesCreation : MonoBehaviour
         else if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
         else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
         else if (Wave.GetInstance().diff_select) { /*Debug.Log("Menu Sélection de la difficulté actif");*/}
+        /*else if (PathUtilities.IsPathPossible(node1, node2))
+        {
+            Debug.Log("chemin possible");
+            createObstacle(clickPos);
+        }*/
 
         //Cellule libre - OK pour placement
-        else { createObstacle(clickPos); }
+        else
+        {
+            createObstacle(clickPos);
+        }
     }
 
     private void createObstacle(Vector2 clickPos)
