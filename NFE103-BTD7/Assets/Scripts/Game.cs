@@ -6,18 +6,6 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     private static Game _instance;
-    public static Wave wave;
-    public static Player player;
-
-    void Awake()
-    {
-        //if (_instance == null)
-        //{
-        //    _instance = this;
-        //    //DontDestroyOnLoad(this.gameObject);
-        //}
-        //else { Destroy(this); }
-    }
 
     public static Game GetInstance()
     {

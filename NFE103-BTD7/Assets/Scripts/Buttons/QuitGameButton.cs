@@ -8,24 +8,34 @@ using UnityEngine.EventSystems;
 public class QuitGameButton : MonoBehaviour
 {
     [SerializeField] GameObject QuitPanel;
+    [SerializeField] GameObject DifficultyPanel;
 
     public void QuitGame()
     {
-        Game.wave.quitMenu = true;
+        Wave.GetInstance().quitMenu = true;
         Time.timeScale = 0;
         QuitPanel.SetActive(true);
     }
 
     public void ConfirmQuitGame()
     {
-        Game.wave.endWave(0);
+        Wave.GetInstance().endWave(0);
+        DifficultyPanel.SetActive(true);
         SceneManager.LoadScene("Menu");
     }
 
     public void CancelQuitGame()
     {
-        Game.wave.quitMenu = false;
-        Time.timeScale = 1;
+        Wave.GetInstance().quitMenu = false;
+        if (Wave.GetInstance().paused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        
         QuitPanel.SetActive(false);
     }
 }

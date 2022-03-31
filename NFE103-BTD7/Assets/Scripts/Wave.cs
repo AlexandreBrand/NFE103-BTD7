@@ -44,51 +44,44 @@ public class Wave : MonoBehaviour
 
         monstersLeft = 0;
         lastTimeSpawn = Time.time;
-        waveLvL.text = "LvL " + waveNumber.ToString();
+        waveLvL.text = "LvL 0";
         monstersAmount = 3;
 
     }
 
     private void Update()
     {
+        waveLvL.text = "LvL " + waveNumber.ToString();
         //A appeler quand un ennemy meurs ou arrive à la cellule de fin
         //endWave(waveEndBounty);
-
-        double time = Time.time - lastTimeSpawn;
-        if (waveStarted == true && monstersAmount > monstersLeft && 0.2f < time)
-        {
-            createEnemy();    
-            lastTimeSpawn = Time.time;
-            monstersLeft ++;
-        }
+        createEnemy();    
     }
 
     public static Wave GetInstance() { return _instance; }
 
-
-    public void loseLife(int dmg) { Player.GetInstance().LifePoints -= dmg; }
-
+    public void createEnemy()
+    {
+        double time = Time.time - lastTimeSpawn;
+        if (waveStarted && monstersAmount > monstersLeft && 0.2f < time)
+        {
+            GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Knight);
+            newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
+            lastTimeSpawn = Time.time;
+            monstersLeft++;
+        }
+    }
 
     public void endWave(int WaveEndBounty)
     {
         //Plus de points de vie
-        if(Player.GetInstance().LifePoints == 0)
-        {
-            Game.GetInstance().Lost();
-        }
+        if (Player.GetInstance().LifePoints == 0) { Game.GetInstance().Lost(); }
 
         //Tous les ennemis battus
-        else if(monstersLeft == 0)
+        else if (monstersLeft == 0)
         {
             waveStarted = false;
             waveStateText.text = "START";
             Player.GetInstance().GoldCoins += WaveEndBounty;
         }
-    }
-
-    public void createEnemy()
-    {
-        GameObject newEnemy = EnemyFactory.GetEnemy(EnemyType.Knight);
-        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
     }
 }

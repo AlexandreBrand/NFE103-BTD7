@@ -4936,7 +4936,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &1016743438
 MonoBehaviour:
@@ -6183,7 +6183,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &1458956030
 MonoBehaviour:
@@ -7114,6 +7114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuitPanel: {fileID: 1016743436}
+  DifficultyPanel: {fileID: 0}
 --- !u!114 &1633143393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7395,6 +7396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuitPanel: {fileID: 1016743436}
+  DifficultyPanel: {fileID: 0}
 --- !u!114 &1709568085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8036,6 +8038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuitPanel: {fileID: 1016743436}
+  DifficultyPanel: {fileID: 1458956027}
 --- !u!1001 &2073208845
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class PlaceTower : MonoBehaviour
             clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { /*Debug.Log("Placement impossible");*/  }
 
-        else if (Game.wave.waveStarted) { error_msg.text = "Vague en cours"; }
+        else if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
 
         //check if on osbtacle
         else if(collider != Physics2D.OverlapPoint(clickPos))

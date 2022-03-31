@@ -7,25 +7,23 @@ using TMPro;
 
 public class ObstaclesCreation : MonoBehaviour
 {
-    public GameObject obstacle;
-
     private new BoxCollider2D collider;
-
+    public GameObject obstacle;
     public static List<GameObject> obstacleTiles = new List<GameObject>();
 
     public TextMeshProUGUI error_msg;
     public TextMeshProUGUI obs_restants;
 
-    // Start is called before the first frame update
+
     void Start()
     {
+        obstacleTiles.Clear();
         obs_restants.text = "Obstacles restants : " + Wave.GetInstance().maxObstacles.ToString();
         collider = GetComponent<BoxCollider2D>();
         error_msg.text = "Placez des obstacles";
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -35,11 +33,10 @@ public class ObstaclesCreation : MonoBehaviour
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
 
-            checkClickObstacle(clickPos);
-            obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
+            checkClickObstacle(clickPos);   
         }
-
         if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
+        obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
     }
 
     
@@ -55,7 +52,7 @@ public class ObstaclesCreation : MonoBehaviour
             foreach (GameObject obs in obstacleTiles)
             {
                 Vector2 pos = obs.transform.position;
-                if (pos == clickPos && !Game.wave.waveStarted)
+                if (pos == clickPos && !Wave.GetInstance().waveStarted)
                 {
                     Destroy(obs);
                     obstacleTiles.Remove(obs);
@@ -69,7 +66,6 @@ public class ObstaclesCreation : MonoBehaviour
             }
         }
 
-        //Placement impossible (hors grille, max obstacles, chemin bloqué)
         else if (
             obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || //Max d'obstacles placés
             obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
