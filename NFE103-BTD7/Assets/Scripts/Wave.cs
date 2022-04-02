@@ -70,6 +70,7 @@ public class Wave : MonoBehaviour
         //endWave(waveEndBounty);
 
         double time = Time.time - lastTimeSpawn;
+
         if (waveStarted && monsterNbr > monstersLeft && 0.6f < time)
         {
             EnemySpawner();

@@ -21,6 +21,7 @@ public class QuitGameButton : MonoBehaviour
     {
         Wave.GetInstance().endWave(0);
         DifficultyPanel.SetActive(true);
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
 
