@@ -19,6 +19,7 @@ public class Wave : MonoBehaviour
     public double maxObstacles;
     public int waveEndBounty;
     public bool diff_select;
+    public double bountyCoef;
 
     public int monsterNbr;
     public int tanksNbr;
@@ -28,6 +29,7 @@ public class Wave : MonoBehaviour
     public int knightNbr;
     public int knightLeft;
     public int monstersLeft;
+    public double monsterCoef;
     
     
     public TextMeshProUGUI waveStateText;
@@ -45,9 +47,10 @@ public class Wave : MonoBehaviour
         paused = false;
         quitMenu = false;
 
-        waveNumber = 0;
+        waveNumber = 1;
         maxObstacles = 0;
         waveEndBounty = 0;
+        bountyCoef = 0;
         diff_select = true;
 
         monstersLeft = 0;
@@ -60,6 +63,7 @@ public class Wave : MonoBehaviour
         tanksNbr = 1;
         assassinsNbr = 1;
         knightNbr = 1;
+        monsterCoef = 0;
 
     }
 
@@ -72,7 +76,7 @@ public class Wave : MonoBehaviour
 
         double time = Time.time - lastTimeSpawn;
 
-        if (waveStarted && monsterNbr > monstersLeft && 0.6f < time)
+        if (waveStarted && monsterNbr > monstersLeft && 0.3f < time)
         {
             EnemySpawner();
         }
@@ -134,17 +138,9 @@ public class Wave : MonoBehaviour
     public void StartWave()
     {
         Game.GetInstance().GameStarted = true;
-        string coef_str = "1." + (double)Wave.GetInstance().waveNumber;
-        double coef = Convert.ToDouble(coef_str);
-
-        waveEndBounty = (int)Math.Round(waveEndBounty*coef);
-        tanksNbr = (int)Math.Round(tanksNbr * coef);
-        knightNbr = (int)Math.Round(knightNbr * coef);
-        assassinsNbr = (int)Math.Round(assassinsNbr * coef);
-
         waveStarted = true;
         waveStateText.text = "PAUSE";
-        waveNumber++;
+        
     }
 
     public void PauseOrResumeWave()
@@ -157,7 +153,7 @@ public class Wave : MonoBehaviour
             waveStateText.text = "RESUME";
         }
         //Reprendre
-        else if (Wave.GetInstance().paused)
+        else if (paused)
         {
             Time.timeScale = 1;
             paused = false;
@@ -166,17 +162,29 @@ public class Wave : MonoBehaviour
     }
 
 
-    public void endWave(int WaveEndBounty)
+    public void endWave()
     {
         //Plus de points de vie
         if (Player.GetInstance().LifePoints == 0) { Game.GetInstance().Lost(); }
 
         //Tous les ennemis battus
-        else if (monstersLeft == 0)
+        else //if (monstersLeft == 0)
         {
+            Debug.Log("wave : " + waveNumber);
+            Debug.Log("assassins : " + assassinsNbr);
+            Debug.Log("knights : " + knightNbr);
+            Debug.Log("tanks : "+tanksNbr);
             waveStarted = false;
             waveStateText.text = "START";
-            Player.GetInstance().GoldCoins += WaveEndBounty;
+
+            Player.GetInstance().GoldCoins += waveEndBounty;
+
+            waveEndBounty = (int)Math.Round(waveEndBounty * bountyCoef);
+            tanksNbr = (int)Math.Round(tanksNbr *monsterCoef);
+            knightNbr = (int)Math.Round(knightNbr * monsterCoef);
+            assassinsNbr = (int)Math.Round(assassinsNbr * monsterCoef);
+
+            waveNumber++;
         }
     }
 }

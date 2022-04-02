@@ -26,7 +26,7 @@ public class Game : MonoBehaviour
         //TODO fin de partie
     }
 
-    public void setDifficulty(int maxObs, int endBounty, bool diffSelect, int tankNbr, int knightNbr, int assassinNbr, int lifePts, int golds)
+    public void setDifficulty(int maxObs, int endBounty, bool diffSelect, int tankNbr, int knightNbr, int assassinNbr, int lifePts, int golds, double bountyCoef, double monsterCoef)
     {
         Wave.GetInstance().maxObstacles = maxObs;
         Wave.GetInstance().waveEndBounty = endBounty;
@@ -34,7 +34,8 @@ public class Game : MonoBehaviour
         Wave.GetInstance().tanksNbr = tankNbr;
         Wave.GetInstance().knightNbr = knightNbr;
         Wave.GetInstance().assassinsNbr = assassinNbr;
-
+        Wave.GetInstance().bountyCoef = bountyCoef;
+        Wave.GetInstance().monsterCoef = monsterCoef;
         Player.GetInstance().LifePoints = lifePts;
         Player.GetInstance().GoldCoins = golds;
 
