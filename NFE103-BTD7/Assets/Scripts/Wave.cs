@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Wave : MonoBehaviour
 {
@@ -83,7 +84,7 @@ public class Wave : MonoBehaviour
 
     public void EnemySpawner()
     {
-        int rand = Random.Range(1,4);
+        int rand = UnityEngine.Random.Range(1,4);
 
         switch (rand)
         {
@@ -132,6 +133,15 @@ public class Wave : MonoBehaviour
 
     public void StartWave()
     {
+        Game.GetInstance().GameStarted = true;
+        string coef_str = "1." + (double)Wave.GetInstance().waveNumber;
+        double coef = Convert.ToDouble(coef_str);
+
+        waveEndBounty = (int)Math.Round(waveEndBounty*coef);
+        tanksNbr = (int)Math.Round(tanksNbr * coef);
+        knightNbr = (int)Math.Round(knightNbr * coef);
+        assassinsNbr = (int)Math.Round(assassinsNbr * coef);
+
         waveStarted = true;
         waveStateText.text = "PAUSE";
         waveNumber++;

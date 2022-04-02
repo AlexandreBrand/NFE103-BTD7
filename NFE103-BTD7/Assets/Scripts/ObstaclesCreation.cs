@@ -75,7 +75,7 @@ public class ObstaclesCreation : MonoBehaviour
             obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
             clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { /*Debug.Log("Placement impossible");*/  }
-        else if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
+        else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted) { error_msg.text = "Vague en cours"; }
         else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
         else if (Wave.GetInstance().diff_select) { /*Debug.Log("Menu Sélection de la difficulté actif");*/}
         /*else if (PathUtilities.IsPathPossible(node1, node2))

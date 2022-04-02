@@ -2880,9 +2880,13 @@ MonoBehaviour:
   maxObstacles: 0
   waveEndBounty: 0
   diff_select: 0
+  monsterNbr: 0
   tanksNbr: 0
+  tanksLeft: 0
   assassinsNbr: 0
+  assassinsLeft: 0
   knightNbr: 0
+  knightLeft: 0
   monstersLeft: 0
   waveStateText: {fileID: 424563455}
   waveLvL: {fileID: 831083924}
@@ -2899,6 +2903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630d9a48c98304e1ab49aa6ef9b4b170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DifficultyPanel: {fileID: 1458956027}
+  GameStarted: 0
 --- !u!114 &218452647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6034,7 +6040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c8dccb03efd46768f40ea16a0d7f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DifficultyPanel: {fileID: 1458956027}
 --- !u!114 &1401363226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6492,7 +6497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c8dccb03efd46768f40ea16a0d7f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DifficultyPanel: {fileID: 1458956027}
 --- !u!114 &1546018831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7620,7 +7624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c8dccb03efd46768f40ea16a0d7f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DifficultyPanel: {fileID: 1458956027}
 --- !u!114 &1895667153
 MonoBehaviour:
   m_ObjectHideFlags: 0
