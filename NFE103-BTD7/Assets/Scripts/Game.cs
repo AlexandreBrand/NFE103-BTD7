@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
@@ -23,7 +24,7 @@ public class Game : MonoBehaviour
 
     public void Lost()
     {
-        //TODO fin de partie
+        SceneManager.LoadScene("Menu");
     }
 
     public void setDifficulty(int maxObs, int endBounty, bool diffSelect, int tankNbr, int knightNbr, int assassinNbr, int lifePts, int golds, double bountyCoef, double monsterCoef)

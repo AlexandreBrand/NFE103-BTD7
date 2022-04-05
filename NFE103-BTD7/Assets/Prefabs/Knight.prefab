@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 20
-  KillReward: 8
-  Damage: 8
+  KillReward: 5
+  Damage: 9
 --- !u!114 &6250499312777609294
 MonoBehaviour:
   m_ObjectHideFlags: 0

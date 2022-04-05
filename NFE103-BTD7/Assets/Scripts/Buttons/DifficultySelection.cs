@@ -18,9 +18,4 @@ public class DifficultySelection : MonoBehaviour
     {
         Game.GetInstance().setDifficulty(20, 50, false, 1, 7, 14, 100, 200, 1.01, 1.24);
     }
-
-    public void TEST()
-    {
-        Wave.GetInstance().endWave();
-    }
 }

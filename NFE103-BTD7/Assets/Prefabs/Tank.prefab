@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHealth: 60
   KillReward: 10
-  Damage: 3
+  Damage: 5
 --- !u!114 &-247388991901713278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
-  pickNextWaypointDist: 2
+  pickNextWaypointDist: 0.3
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
