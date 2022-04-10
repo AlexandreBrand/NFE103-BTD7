@@ -67,12 +67,12 @@ public class PlaceTower : MonoBehaviour
                         Vector2 posTower = tower.transform.position;
                         if (posTower == clickPos)
                         {
-                            error_msg.text = "Une tourelle est d?j? pr?sente";
+                            error_msg.text = "Une tourelle est deja presente";
                             break;
                         }
                         else
                         {
-
+                            createObstacle(clickPos);
                         }
                     }
                 }
@@ -85,6 +85,6 @@ public class PlaceTower : MonoBehaviour
         GameObject newTower = Instantiate(tower);
         newTower.transform.position = clickPos;
         towerTiles.Add(newTower);
-        error_msg.text = "Tower cr??";
+        error_msg.text = "Tower cree";
     }
 }

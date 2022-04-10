@@ -16,8 +16,8 @@ public class Gunner : Tower
     {
         Rate = 5;
         Range = 100;
-        Damage = 5;
-        Zone = 2;
+        Damage = 10;
+        Zone = 0;
 
         GameObject newGunner = Instantiate(PrefabTower);
         MapGenerator map = GetComponent<MapGenerator>();

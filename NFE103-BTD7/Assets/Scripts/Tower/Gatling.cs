@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gatling : ITower
+public class Gatling : Tower
 {
     public GameObject PrefabTower;
     public float Rate { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }

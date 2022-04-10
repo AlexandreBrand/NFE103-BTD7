@@ -14,10 +14,10 @@ public class Rocket : Tower
 
     public Rocket()
     {
-        Rate = 2;
+        Rate = 5;
         Range = 200;
-        Damage = 10;
-        Zone = 0;
+        Damage = 5;
+        Zone = 2;
 
         GameObject newGunner = Instantiate(PrefabTower);
         MapGenerator map = GetComponent<MapGenerator>();
