@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gunner : MonoBehaviour, ITower
+public class Gunner : Tower
 {
     public GameObject PrefabTower;
     public float Rate { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }

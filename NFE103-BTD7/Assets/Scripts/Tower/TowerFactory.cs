@@ -10,7 +10,7 @@ public class TowerFactory : MonoBehaviour
 
     }
 
-    public ITower GetTower(TowerType type)
+    public  ITower GetTower(TowerType type)
     {
         switch (type)
         {
