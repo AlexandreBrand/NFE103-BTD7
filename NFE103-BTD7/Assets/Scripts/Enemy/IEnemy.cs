@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class IEnemy : MonoBehaviour
 {
     [SerializeField] public float EnemyHealth;
-    [SerializeField] public float MovementSpeed;
     [SerializeField] public int KillReward;
     [SerializeField] public int Damage;
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlaceTower : MonoBehaviour
 {
-    //@TODO mettre à jour avec l'interface
+    //@TODO mettre ? jour avec l'interface
     public GameObject obstacle;
 
     public GameObject tower;
@@ -45,18 +45,17 @@ public class PlaceTower : MonoBehaviour
 
         
 
-        //Placement impossible (hors grille, max obstacles, chemin bloqué)
+        //Placement impossible (hors grille, max obstacles, chemin bloqu?)
         if (
-            towerTiles.Count > Game.wave.maxTowers - 1 || //Max d'obstacles placés
-            towerTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
-            towerTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
+            towerTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloqu?e
+            towerTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloqu?e
             clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { /*Debug.Log("Placement impossible");*/  }
 
-        else if (Game.wave.waveStarted) { error_msg.text = "Vague en cours"; }
+        else if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
 
         //check if on osbtacle
-        else (collider != Physics2D.OverlapPoint(clickPos))
+        else if(collider != Physics2D.OverlapPoint(clickPos))
         {
             foreach (GameObject obs in ObstaclesCreation.obstacleTiles)
             {
@@ -68,7 +67,7 @@ public class PlaceTower : MonoBehaviour
                         Vector2 posTower = tower.transform.position;
                         if (posTower == clickPos)
                         {
-                            error_msg.text = "Une tourelle est déjà présente";
+                            error_msg.text = "Une tourelle est d?j? pr?sente";
                             break;
                         }
                         else
@@ -86,6 +85,6 @@ public class PlaceTower : MonoBehaviour
         GameObject newTower = Instantiate(tower);
         newTower.transform.position = clickPos;
         towerTiles.Add(newTower);
-        error_msg.text = "Tower créé";
+        error_msg.text = "Tower cr??";
     }
 }

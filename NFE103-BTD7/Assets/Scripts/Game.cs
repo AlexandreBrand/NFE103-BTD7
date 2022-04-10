@@ -1,23 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
     private static Game _instance;
-    public static Wave wave;
-    public static Player player;
 
+    [SerializeField] GameObject DifficultyPanel;
+    public bool GameStarted = false;
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else { Destroy(this); }
+        _instance = this;
     }
 
     public static Game GetInstance()
@@ -25,30 +22,24 @@ public class Game : MonoBehaviour
         return _instance;
     }
 
-
-    void Init()
-    {
-        wave = Wave.GetInstance();
-        player = Player.GetInstance();
-
-        wave.waveStarted = false;
-        wave.paused = false;
-        wave.waveNumber = 0;
-        wave.maxObstacles = 30;
-
-        player.LifePoints = 100;
-        player.GoldCoins = 300;
-    }
-
-
-    void Start()
-    {
-        Init();
-        Debug.Log(wave.waveStarted);
-    }
-
     public void Lost()
     {
-        //TODO fin de partie
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void setDifficulty(int maxObs, int endBounty, bool diffSelect, int tankNbr, int knightNbr, int assassinNbr, int lifePts, int golds, double bountyCoef, double monsterCoef)
+    {
+        Wave.GetInstance().maxObstacles = maxObs;
+        Wave.GetInstance().waveEndBounty = endBounty;
+        Wave.GetInstance().diff_select = diffSelect;
+        Wave.GetInstance().tanksNbr = tankNbr;
+        Wave.GetInstance().knightNbr = knightNbr;
+        Wave.GetInstance().assassinsNbr = assassinNbr;
+        Wave.GetInstance().bountyCoef = bountyCoef;
+        Wave.GetInstance().monsterCoef = monsterCoef;
+        Player.GetInstance().LifePoints = lifePts;
+        Player.GetInstance().GoldCoins = golds;
+
+        DifficultyPanel.SetActive(false);
     }
 }

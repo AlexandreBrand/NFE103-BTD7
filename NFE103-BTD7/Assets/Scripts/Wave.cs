@@ -2,73 +2,231 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+using System;
 
 public class Wave : MonoBehaviour
 {
     private static Wave _instance;
 
-    public int maxTowers;
-    public int maxObstacles;
+    
     public bool waveStarted;
-    public int monstersAmount;
-    public int monstersLeft;
-    public int waveNumber;
     public bool paused;
-    public int waveEndBounty;
-    public Text waveStateText;
+    public bool quitMenu;
+    public bool spawned;
 
-    public GameObject ennemy;
-    public EnemyFactory enemyFactory;
+    public int waveNumber;
+    public double maxObstacles;
+    public int waveEndBounty;
+    public bool diff_select;
+    public double bountyCoef;
+
+    public int monsterNbr;
+    public int tanksNbr;
+    public int tanksLeft;
+    public int assassinsNbr;
+    public int assassinsLeft;
+    public int knightNbr;
+    public int knightLeft;
+    public int monstersLeft;
+    public double monsterCoef;
+    
+    
+    public TextMeshProUGUI waveStateText;
+    public TextMeshProUGUI waveLvL;
+    public float lastTimeSpawn;
+
+    public List<GameObject> enemies;
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else { Destroy(this); }
+        _instance = this;
     }
 
     private void Start()
     {
-        //GameObject newEnemy = Instantiate(ennemy);
-        Debug.Log("start wave");
-        GameObject newEnemy = enemyFactory.GetEnemy(EnemyType.Tank);
-        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
-        monstersLeft = 1;
+        waveStarted = false;
+        paused = false;
+        quitMenu = false;
+        spawned = false;
+
+        waveNumber = 1;
+        maxObstacles = 0;
+        waveEndBounty = 0;
+        bountyCoef = 0;
+        diff_select = true;
+
+        monstersLeft = 0;
+        assassinsLeft = 0;
+        knightLeft = 0;
+        tanksLeft = 0;
+        lastTimeSpawn = Time.time;
+        waveLvL.text = "LvL 1";
+        monsterNbr = tanksNbr+knightNbr+assassinsNbr;
+        tanksNbr = 1;
+        assassinsNbr = 1;
+        knightNbr = 1;
+        monsterCoef = 0;
+
     }
 
     private void Update()
     {
-        endWave(waveEndBounty);
+        endWave();
+        loseLife();
+
+        double time = Time.time - lastTimeSpawn;
+        if (waveStarted && monsterNbr > monstersLeft && 0.3f < time)
+        {
+            EnemySpawner();
+        }  
     }
 
     public static Wave GetInstance() { return _instance; }
 
-    public void loseLife(int dmg) { Player.GetInstance().LifePoints -= dmg; }
 
-    public void endWave(int WaveEndBounty)
+    public void EnemySpawner()
     {
-        //Plus de points de vie
-        if(Player.GetInstance().LifePoints == 0)
+        int rand = UnityEngine.Random.Range(1,4);
+        
+        switch (rand)
         {
-            Game.GetInstance().Lost();
-        }
+            case 1:
+                if(assassinsLeft < assassinsNbr)
+                {
+                    CreateEnemy(EnemyType.Bloodthirsty);
+                    assassinsLeft++;
+                }
+                break;
 
-        //Tous les ennemis battus
-        else if(monstersLeft == 0)
+            case 2:
+                if (knightLeft < knightNbr)
+                {
+                    CreateEnemy(EnemyType.Knight);
+                    knightLeft++;
+                }
+                break;
+            case 3:
+                if (tanksLeft < tanksNbr)
+                {
+                    CreateEnemy(EnemyType.Tank);
+                    tanksLeft++;
+                }
+                break;
+
+            default:
+                if (assassinsLeft < assassinsNbr)
+                {
+                    CreateEnemy(EnemyType.Bloodthirsty);
+                    assassinsLeft++;
+                }
+                break;
+        }  
+    }
+
+    public void CreateEnemy(EnemyType type)
+    {
+        GameObject newEnemy = EnemyFactory.GetEnemy(type);
+        newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
+        lastTimeSpawn = Time.time;
+        monstersLeft++;
+        spawned = true;
+
+        enemies.Add(newEnemy);
+    }
+
+    public void StartWave()
+    {
+        monsterNbr = tanksNbr + knightNbr + assassinsNbr;
+        Game.GetInstance().GameStarted = true;
+        waveStateText.text = "PAUSE";
+        waveLvL.text = "LvL " + waveNumber.ToString();
+        waveStarted = true;
+    }
+
+    public void PauseOrResumeWave()
+    {
+        //Mettre en pause
+        if (!paused)
         {
-            waveStarted = false;
-            Player.GetInstance().GoldCoins += WaveEndBounty;
+            Time.timeScale = 0;
+            paused = true;
+            waveStateText.text = "RESUME";
+        }
+        //Reprendre
+        else if (paused)
+        {
+            Time.timeScale = 1;
+            paused = false;
+            waveStateText.text = "PAUSE";
         }
     }
 
-    public void createEnemies()
+    public void loseLife()
     {
-        for (int i = 0; i < monstersAmount; i++)
+        Vector2 endPos;
+        endPos = new Vector2(
+            MapGenerator.GetInstance().EndC.transform.position.x,
+            MapGenerator.GetInstance().EndC.transform.position.y);
+
+        foreach(GameObject g in enemies)
         {
-            //instancier monstres
+            double x = Math.Round(g.transform.position.x * 2);
+            double y = Math.Round(g.transform.position.y * 2);
+
+            Vector2 enemyPos;
+            enemyPos = new Vector2((float)x, (float)y);
+
+
+            if (enemyPos == endPos)
+            {
+                int life = Player.GetInstance().LifePoints - g.GetComponent<IEnemy>().Damage;
+                if (life < 0) { Player.GetInstance().LifePoints = 0; }
+                else { Player.GetInstance().LifePoints = life; }
+                enemies.Remove(g);
+                Destroy(g);
+                monstersLeft--;
+                break;
+            }
         }
+    }
+
+    public void winWave()
+    {
+        
+        waveStateText.text = "START";
+
+        Player.GetInstance().GoldCoins += waveEndBounty;
+
+        if (tanksNbr == 0) tanksNbr = 1;
+
+        waveEndBounty = (int)Math.Round(waveEndBounty * bountyCoef);
+        tanksNbr = (int)Math.Round(tanksNbr * monsterCoef);
+        knightNbr = (int)Math.Round(knightNbr * monsterCoef);
+        assassinsNbr = (int)Math.Round(assassinsNbr * monsterCoef);
+        tanksLeft = 0;
+        knightLeft = 0;
+        assassinsLeft = 0;
+
+        waveNumber++;
+        waveStarted = false;
+        spawned = false;
+    }
+
+    public void endWave()
+    {
+        if (spawned)
+        {
+            //Plus de points de vie
+            if (Player.GetInstance().LifePoints <= 0) { Game.GetInstance().Lost(); }
+
+            //Tous les ennemis battus
+            else if (monstersLeft == 0)
+            {
+                winWave();
+            }
+        }
+
     }
 }

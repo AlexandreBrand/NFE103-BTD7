@@ -5,5 +5,6 @@ using UnityEngine;
 public enum EnemyType
 {
     Tank,
-    Bowman
+    Bloodthirsty,
+    Knight
 }

@@ -26,7 +26,7 @@ public class MapGenerator : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else { Destroy(this); }
     }
@@ -53,10 +53,5 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         generateMap();
-    }
-
-    void Update()
-    {
-
     }
 }

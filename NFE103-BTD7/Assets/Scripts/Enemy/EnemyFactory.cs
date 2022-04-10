@@ -3,24 +3,33 @@ using UnityEngine;
 
 public class EnemyFactory : MonoBehaviour
 {
-    public GameObject prefabTank;
-    public GameObject GetEnemy (EnemyType type)
+    public GameObject prefabTank; 
+    public GameObject PrefabBloodthirsty;
+    public GameObject PrefabKnight;
+    private static EnemyFactory Instance;
+    private void Awake()
     {
-        Debug.Log("start getEnemy");
+        Instance = this;
+    }
+    public static GameObject GetEnemy(EnemyType type)
+    {
         switch (type)
         {
             case EnemyType.Tank:
-                Debug.Log("create tank");
-                GameObject tank = Instantiate(prefabTank);
+                GameObject tank = Instantiate(Instance.prefabTank);
                 return tank;
-                
-            case EnemyType.Bowman:
-                //return new Bowman();
 
+            case EnemyType.Bloodthirsty:
+                GameObject bloodthirsty = Instantiate(Instance.PrefabBloodthirsty);
+                return bloodthirsty;
+
+            case EnemyType.Knight:
+                GameObject knight = Instantiate(Instance.PrefabKnight);
+                return knight;
 
             default:
                 throw new Exception();
         }
     }
-  
+
 }
