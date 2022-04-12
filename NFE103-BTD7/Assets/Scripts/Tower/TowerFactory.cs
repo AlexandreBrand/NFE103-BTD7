@@ -5,23 +5,35 @@ using UnityEngine;
 
 public class TowerFactory : MonoBehaviour
 {
-    public TowerFactory()
+    public GameObject PrefabGatling;
+    public GameObject PrefabGunner;
+    public GameObject PrefabRocket;
+    public GameObject PrefabSniper;
+
+    private static TowerFactory Instance;
+    private void Awake()
     {
-
+        Instance = this;
     }
-
-    public  Tower GetTower(TowerType type)
+    public static GameObject GetTower(TowerType type)
     {
         switch (type)
         {
             case TowerType.Gatling:
-                return new Gatling();
+                GameObject gatling = Instantiate(Instance.PrefabGatling);
+                return gatling;
 
             case TowerType.Gunner:
-                return new Gunner();
+                GameObject gunner = Instantiate(Instance.PrefabGunner);
+                return gunner;
 
             case TowerType.Rocket:
-                return new Rocket();
+                GameObject rocket = Instantiate(Instance.PrefabRocket);
+                return rocket;
+
+            case TowerType.Sniper:
+                GameObject sniper = Instantiate(Instance.PrefabSniper);
+                return sniper;
 
             default:
                 throw new Exception();

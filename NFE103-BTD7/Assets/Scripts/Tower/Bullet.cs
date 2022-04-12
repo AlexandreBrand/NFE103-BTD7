@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
+        Debug.Log("try to destroy");
         Destroy(gameObject);
         //A supprimer test sans vie
         Destroy(target.gameObject);

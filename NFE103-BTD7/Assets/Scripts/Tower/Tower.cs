@@ -37,6 +37,7 @@ public abstract class Tower : MonoBehaviour
     //Pour ne pas gaspiller de ressources
     private void UpdateTarget()
     {
+        Debug.Log("UpdateTarget");
         //plus proche
         float shortestDistanceToEnemy = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -62,6 +63,7 @@ public abstract class Tower : MonoBehaviour
     }
     public void Shoot()
     {
+        Debug.Log("shoot");
         GameObject bulletGO = Instantiate(bulletprefab, transform);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 

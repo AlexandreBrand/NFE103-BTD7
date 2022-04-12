@@ -27,7 +27,8 @@ public class ObstaclesCreation : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0) && !Wave.GetInstance().placeTower)
+        if (Input.GetMouseButtonDown(0) && !Wave.GetInstance().placeTower)
         {
             Vector2 clickPos;
             clickPos = new Vector2(

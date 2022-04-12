@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 218452646}
   - component: {fileID: 218452647}
   - component: {fileID: 218452648}
+  - component: {fileID: 218452650}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -2891,6 +2892,7 @@ MonoBehaviour:
   knightLeft: 0
   monstersLeft: 0
   monsterCoef: 0
+  placeTower: 0
   waveStateText: {fileID: 424563455}
   waveLvL: {fileID: 831083924}
   lastTimeSpawn: 0
@@ -2921,10 +2923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001247fcec7254b6f9e7c651ff51ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LifePoints: 0
-  GoldCoins: 0
-  Life: {fileID: 1685869225}
-  Gold: {fileID: 1379495677}
 --- !u!114 &218452648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2988,6 +2986,21 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &218452650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218452640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b6959115395ee488ad83df7b407d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
+  tower: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
+  error_msg: {fileID: 0}
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,6 +3221,7 @@ GameObject:
   - component: {fileID: 295894459}
   - component: {fileID: 295894458}
   - component: {fileID: 295894457}
+  - component: {fileID: 295894460}
   m_Layer: 5
   m_Name: Button Tower 1
   m_TagString: GameButton
@@ -3317,6 +3331,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295894455}
   m_CullTransparentMesh: 1
+--- !u!114 &295894460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295894455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd93d9474cb37fb4ea3d0cf9e5732f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &403030659
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,7 +6183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1458956028
 MonoBehaviour:
   m_ObjectHideFlags: 0

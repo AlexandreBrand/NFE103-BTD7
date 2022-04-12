@@ -31,7 +31,8 @@ public class Wave : MonoBehaviour
     public int knightLeft;
     public int monstersLeft;
     public double monsterCoef;
-    
+
+    public bool placeTower = false;
     
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
