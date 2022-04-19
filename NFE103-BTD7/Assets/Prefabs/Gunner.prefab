@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f8b60973b9321499346c3c4b414308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  fireRate: 1
   fireCountDown: 0
-  range: 5
+  range: 12
   damage: 10
   zone: 0
   isPrefabRangeCreated: 0

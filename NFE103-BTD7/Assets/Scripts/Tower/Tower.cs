@@ -68,7 +68,6 @@ public abstract class Tower : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistanceToEnemy <= range)
         {
-            Debug.Log(shortestDistanceToEnemy + " tower range : "+ range);
             target = nearestEnemy.transform;
         }
         else
@@ -93,7 +92,8 @@ public abstract class Tower : MonoBehaviour
         GameObject newTowerRange = Instantiate(rangePrefab);
         newTowerRange.transform.position = transform.position;
         newTowerRange.GetComponent<Renderer>().enabled = false;
-        newTowerRange.transform.localScale = new Vector3(range, range, range);
+                                                        //largeur, hauteur, prodondeur
+        newTowerRange.transform.localScale = new Vector3(range*2, range*2, range);
         rangePrefab = newTowerRange;
         //Color32 color1 = rangePrefabColor;
         //color1.a = 0;
