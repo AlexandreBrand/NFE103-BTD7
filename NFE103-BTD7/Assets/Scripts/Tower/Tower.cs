@@ -21,23 +21,26 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] public float range;
     [SerializeField] public float damage;
     [SerializeField] public float zone;
+    [SerializeField] public bool isPrefabRangeCreated = false;
     [SerializeField] public Transform target;
     [SerializeField] public GameObject bulletPrefab;
     [SerializeField] public Transform firePoint;
     [SerializeField] public GameObject rangePrefab;
+    [SerializeField] public Color32 rangePrefabColor;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         //InvokeRepeating("UpdateTarget", 0f, 0.5f);
-        transform.localScale = new Vector3(range, range, 0.0f);
+        createPrefabRange();
+        rangePrefabColor = rangePrefab.GetComponent<Renderer>().sharedMaterial.color;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         UpdateTarget();
-        if (fireCountDown < 0f)
+        if (fireCountDown < 0f && target != null)
         {
             Shoot();
             fireCountDown = 1 / fireRate;
@@ -49,7 +52,6 @@ public abstract class Tower : MonoBehaviour
     //Pour ne pas gaspiller de ressources
     private void UpdateTarget()
     {
-        Debug.Log("UpdateTarget");
         //plus proche
         float shortestDistanceToEnemy = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -75,7 +77,6 @@ public abstract class Tower : MonoBehaviour
     }
     public void Shoot()
     {
-        Debug.Log("shoot");
         GameObject bulletGO = Instantiate(bulletPrefab, transform);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
@@ -86,17 +87,34 @@ public abstract class Tower : MonoBehaviour
         //Target.EnemyHealth = Target.EnemyHealth - Damage;
     }
 
+    public void createPrefabRange()
+    {
+        GameObject newTowerRange = Instantiate(rangePrefab);
+        newTowerRange.transform.position = transform.position;
+
+        //Color32 color1 = rangePrefabColor;
+        //color1.a = 0;
+        //newTowerRange.GetComponent<Renderer>().sharedMaterial.color = color1;
+
+        //newTowerRange.GetComponent<Renderer>().sharedMaterial.color.a = 0;
+
+        //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
+        //newTowerRange.GetComponent<Renderer>().sharedMaterial.color = color;
+
+        //newTowerRange.transform.localScale = new Vector3(10f, 10f, 10f);
+    }
+
     private void OnMouseEnter()
     {
         Debug.Log("mouse enter");
-        var color = rangePrefab.GetComponent<Renderer>().sharedMaterial.color;
-        color.a = 0.5f;
+        Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 125);
+        //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
     }
 
     private void OnMouseExit()
     {
         Debug.Log("mouse exit");
-        var color = rangePrefab.GetComponent<Renderer>().sharedMaterial.color;
-        color.a = 0f;
+        Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
+        //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
     }
 }
