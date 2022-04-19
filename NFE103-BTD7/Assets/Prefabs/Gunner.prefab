@@ -98,13 +98,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 5
   fireCountDown: 0
-  range: 100
+  range: 5
   damage: 10
   zone: 0
+  isPrefabRangeCreated: 0
   target: {fileID: 0}
   bulletPrefab: {fileID: 5904016218627442040, guid: 5ac0c599ab066cb4ab435706bf9176ba, type: 3}
   firePoint: {fileID: 0}
   rangePrefab: {fileID: 7458212504691088428, guid: 8409c70b40e0dcb4cab0c051e9af6a32, type: 3}
+  rangePrefabColor:
+    serializedVersion: 2
+    rgba: 0
 --- !u!61 &-8338389303784515372
 BoxCollider2D:
   m_ObjectHideFlags: 0

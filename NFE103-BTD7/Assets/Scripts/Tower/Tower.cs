@@ -68,6 +68,7 @@ public abstract class Tower : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistanceToEnemy <= range)
         {
+            Debug.Log(shortestDistanceToEnemy + " tower range : "+ range);
             target = nearestEnemy.transform;
         }
         else
@@ -91,7 +92,9 @@ public abstract class Tower : MonoBehaviour
     {
         GameObject newTowerRange = Instantiate(rangePrefab);
         newTowerRange.transform.position = transform.position;
-
+        newTowerRange.GetComponent<Renderer>().enabled = false;
+        newTowerRange.transform.localScale = new Vector3(range, range, range);
+        rangePrefab = newTowerRange;
         //Color32 color1 = rangePrefabColor;
         //color1.a = 0;
         //newTowerRange.GetComponent<Renderer>().sharedMaterial.color = color1;
@@ -107,14 +110,16 @@ public abstract class Tower : MonoBehaviour
     private void OnMouseEnter()
     {
         Debug.Log("mouse enter");
-        Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 125);
+        rangePrefab.GetComponent<Renderer>().enabled = true;
+        //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 125);
         //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
     }
 
     private void OnMouseExit()
     {
         Debug.Log("mouse exit");
-        Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
+        rangePrefab.GetComponent<Renderer>().enabled = false;
+        //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
         //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
     }
 }
