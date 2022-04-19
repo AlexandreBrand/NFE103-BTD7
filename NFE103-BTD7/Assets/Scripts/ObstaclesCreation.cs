@@ -59,10 +59,23 @@ public class ObstaclesCreation : MonoBehaviour
                 Vector2 pos = obs.transform.position;
                 if (pos == clickPos && !Wave.GetInstance().waveStarted)
                 {
-                    Destroy(obs);
-                    obstacleTiles.Remove(obs);
-                    error_msg.text = "Obstacle supprimé";
-                    break;
+                    foreach (GameObject tower in PlaceTower.towerTiles)
+                    {
+                        Vector2 posTower = tower.transform.position;
+                        if (posTower == clickPos)
+                        {
+                            Debug.Log("Une tourelle est presente");
+                            error_msg.text = "Une tourelle est presente";
+                            break;
+                        }
+                        else
+                        {
+                            Destroy(obs);
+                            obstacleTiles.Remove(obs);
+                            error_msg.text = "Obstacle supprimé";
+                            break;
+                        }
+                    }
                 }
                 else
                 {

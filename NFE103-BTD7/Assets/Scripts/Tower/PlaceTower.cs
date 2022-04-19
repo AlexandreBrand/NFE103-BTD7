@@ -11,9 +11,11 @@ public class PlaceTower : MonoBehaviour
 
     public GameObject tower;
 
+    public GameObject towerRange;
+
     //private new BoxCollider2D collider;
 
-    private static List<GameObject> towerTiles = new List<GameObject>();
+    public static List<GameObject> towerTiles = new List<GameObject>();
 
     public Text error_msg;
 
@@ -108,5 +110,10 @@ public class PlaceTower : MonoBehaviour
         GameObject newTower = Instantiate(tower);
         newTower.transform.position = clickPos;
         towerTiles.Add(newTower);
+
+        GameObject newTowerRange = Instantiate(towerRange);
+        newTowerRange.transform.position = clickPos;
+        var color  = newTowerRange.GetComponent<Renderer>().material.color;
+        color.a = 0f;
     }
 }
