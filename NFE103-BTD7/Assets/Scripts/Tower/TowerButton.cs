@@ -9,5 +9,4 @@ public class TowerButton : MonoBehaviour
     {
         Wave.GetInstance().placeTower = !Wave.GetInstance().placeTower;
     }
-
 }

@@ -75,7 +75,7 @@ public class Wave : MonoBehaviour
     private void Update()
     {
         endWave();
-        loseLife();
+        //loseLife();
 
         double time = Time.time - lastTimeSpawn;
         if (waveStarted && monsterNbr > monstersLeft && 0.3f < time)
@@ -173,22 +173,25 @@ public class Wave : MonoBehaviour
 
         foreach(GameObject g in enemies)
         {
-            double x = Math.Round(g.transform.position.x * 2);
-            double y = Math.Round(g.transform.position.y * 2);
-
-            Vector2 enemyPos;
-            enemyPos = new Vector2((float)x, (float)y);
-
-
-            if (enemyPos == endPos)
+            if (g != null)
             {
-                int life = Player.GetInstance().LifePoints - g.GetComponent<IEnemy>().Damage;
-                if (life < 0) { Player.GetInstance().LifePoints = 0; }
-                else { Player.GetInstance().LifePoints = life; }
-                enemies.Remove(g);
-                Destroy(g);
-                monstersLeft--;
-                break;
+                double x = Math.Round(g.transform.position.x * 2);
+                double y = Math.Round(g.transform.position.y * 2);
+
+                Vector2 enemyPos;
+                enemyPos = new Vector2((float)x, (float)y);
+
+
+                if (enemyPos == endPos)
+                {
+                    int life = Player.GetInstance().LifePoints - g.GetComponent<IEnemy>().Damage;
+                    if (life < 0) { Player.GetInstance().LifePoints = 0; }
+                    else { Player.GetInstance().LifePoints = life; }
+                    enemies.Remove(g);
+                    Destroy(g);
+                    monstersLeft--;
+                    break;
+                }
             }
         }
     }

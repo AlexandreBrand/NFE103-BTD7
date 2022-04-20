@@ -28,13 +28,41 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        LifePoints = 0;
-        GoldCoins = 0;
+        Life.text = LifePoints.ToString(); Gold.text = GoldCoins.ToString();
     }
 
     private void Update()
     {
+    }
+
+    public void SetLife(int life)
+    {
+        LifePoints = life;
+    }
+    public void LooseLife(int life)
+    {
+        LifePoints -= life;
+        if (LifePoints < 0)
+        {
+            LifePoints = 0;
+        }
         Life.text = LifePoints.ToString();
+    }
+
+    public void SetGold(int gold)
+    {
+        GoldCoins = gold;
+    }
+
+    public void EarnGold(int gold)
+    {
+        GoldCoins += gold;
+        Gold.text = GoldCoins.ToString();
+    }
+
+    public void SpendGold(int gold)
+    {
+        GoldCoins -= gold;
         Gold.text = GoldCoins.ToString();
     }
 }

@@ -56,15 +56,32 @@ public abstract class Tower : MonoBehaviour
         float shortestDistanceToEnemy = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in Wave.GetInstance().enemies)
+        for(int i=0; i< Wave.GetInstance().enemies.Count; i++)
         {
-            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistanceToEnemy)
+            var enemy = Wave.GetInstance().enemies[i];
+            if (enemy != null)
             {
-                shortestDistanceToEnemy = distanceToEnemy;
-                nearestEnemy = enemy;
+                float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy < shortestDistanceToEnemy)
+                {
+                    shortestDistanceToEnemy = distanceToEnemy;
+                    nearestEnemy = enemy;
+                }
             }
         }
+
+        //foreach (GameObject enemy in Wave.GetInstance().enemies)
+        //{
+        //    if (enemy != null)
+        //    {
+        //        float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+        //        if (distanceToEnemy < shortestDistanceToEnemy)
+        //        {
+        //            shortestDistanceToEnemy = distanceToEnemy;
+        //            nearestEnemy = enemy;
+        //        }
+        //    }
+        //}
 
         if (nearestEnemy != null && shortestDistanceToEnemy <= range)
         {
