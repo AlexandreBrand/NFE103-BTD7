@@ -132,7 +132,6 @@ public abstract class Tower : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log("mouse enter");
         rangePrefab.GetComponent<Renderer>().enabled = true;
         //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 125);
         //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
@@ -140,7 +139,6 @@ public abstract class Tower : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Debug.Log("mouse exit");
         rangePrefab.GetComponent<Renderer>().enabled = false;
         //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
         //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;

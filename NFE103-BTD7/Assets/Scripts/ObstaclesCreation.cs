@@ -46,12 +46,31 @@ public class ObstaclesCreation : MonoBehaviour
     {
         int h = MapGenerator.GetInstance().Height;
         int w = MapGenerator.GetInstance().Width;
+        bool hasCollied = false;
 
         //GraphNode node1 = AstarPath.active.GetNearest(MapGenerator.GetInstance().StartC.transform.position, NNConstraint.Default).node;
         //GraphNode node2 = AstarPath.active.GetNearest(MapGenerator.GetInstance().EndC.transform.position, NNConstraint.Default).node;
 
         //Cellule occupée
-        if (collider != Physics2D.OverlapPoint(clickPos))
+        //if (collider != Physics2D.OverlapPoint(clickPos) && collider != null)
+
+        if (Wave.GetInstance().diff_select) { /*Debug.Log("Menu Sélection de la difficulté actif");*/ }
+        else if (
+            obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || //Max d'obstacles placés
+            obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
+            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
+        { /*Debug.Log("Placement impossible");*/  }
+        else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted) { error_msg.text = "Vague en cours"; }
+        else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/
+        }
+        /*else if (PathUtilities.IsPathPossible(node1, node2))
+        {
+            Debug.Log("chemin possible");
+            createObstacle(clickPos);
+        }*/
+
+        //Cellule libre - OK pour placement
+        else
         {
             foreach (GameObject obs in obstacleTiles)
             {
@@ -67,6 +86,7 @@ public class ObstaclesCreation : MonoBehaviour
                             {
                                 Debug.Log("Une tourelle est presente");
                                 error_msg.text = "Une tourelle est presente";
+                                hasCollied = true;
                                 break;
                             }
                             else
@@ -74,6 +94,7 @@ public class ObstaclesCreation : MonoBehaviour
                                 Destroy(obs);
                                 obstacleTiles.Remove(obs);
                                 error_msg.text = "Obstacle supprimé";
+                                hasCollied = true;
                                 break;
                             }
                         }
@@ -83,34 +104,19 @@ public class ObstaclesCreation : MonoBehaviour
                         Destroy(obs);
                         obstacleTiles.Remove(obs);
                         error_msg.text = "Obstacle supprimé";
+                        hasCollied = true;
                         break;
                     }
                 }
-                else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted)
-                {
-                    error_msg.text = "Vague en cours";
-                }
+                //else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted)
+                //{
+                //    error_msg.text = "Vague en cours";
+                //}
             }
-        }
-
-        else if (
-            obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || //Max d'obstacles placés
-            obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
-            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
-        { /*Debug.Log("Placement impossible");*/  }
-        else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted) { error_msg.text = "Vague en cours"; }
-        else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
-        else if (Wave.GetInstance().diff_select) { /*Debug.Log("Menu Sélection de la difficulté actif");*/}
-        /*else if (PathUtilities.IsPathPossible(node1, node2))
-        {
-            Debug.Log("chemin possible");
-            createObstacle(clickPos);
-        }*/
-
-        //Cellule libre - OK pour placement
-        else
-        {
-            createObstacle(clickPos);
+            if (!hasCollied)
+            {
+                createObstacle(clickPos);
+            }
         }
     }
 

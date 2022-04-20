@@ -105,6 +105,7 @@ public class PlaceTower : MonoBehaviour
                         Debug.Log("tourelle pos� else");
                         createTower(clickPos);
                         Wave.GetInstance().SetPlaceTower(false);
+                        Wave.GetInstance().placeTower = false;
                     }
                 }
             }
