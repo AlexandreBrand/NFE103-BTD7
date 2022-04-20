@@ -2923,6 +2923,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001247fcec7254b6f9e7c651ff51ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LifePoints: 0
+  GoldCoins: 0
+  Life: {fileID: 1685869225}
+  Gold: {fileID: 1379495677}
 --- !u!114 &218452648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,7 +3004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
   tower: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
-  error_msg: {fileID: 0}
+  error_msg: {fileID: 1082763718}
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,7 +3296,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 295894458}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 295894460}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: test
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &295894458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6183,7 +6199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1458956028
 MonoBehaviour:
   m_ObjectHideFlags: 0
