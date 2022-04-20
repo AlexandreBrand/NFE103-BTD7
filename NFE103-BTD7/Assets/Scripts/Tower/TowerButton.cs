@@ -3,22 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TowerButton : MonoBehaviour, IPointerUpHandler
+public class TowerButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void PlaceTower()
     {
+        Wave.GetInstance().placeTower = !Wave.GetInstance().placeTower;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void OnPointerUp(PointerEventData data)
-    {
-        Wave.GetInstance().placeTower = true;
-    }
-
 }
