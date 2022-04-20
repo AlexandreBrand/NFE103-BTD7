@@ -3003,8 +3003,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
-  tower: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
-  error_msg: {fileID: 1082763718}
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3299,7 +3297,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 295894460}
         m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
-        m_MethodName: test
+        m_MethodName: PlaceTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

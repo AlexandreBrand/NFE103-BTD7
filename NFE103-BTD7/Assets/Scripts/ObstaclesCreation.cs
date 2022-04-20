@@ -35,13 +35,12 @@ public class ObstaclesCreation : MonoBehaviour
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
 
-            checkClickObstacle(clickPos);   
+            checkClickObstacle(clickPos);
+
         }
         if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
         obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
     }
-
-    
 
     private void checkClickObstacle(Vector2 clickPos)
     {
@@ -59,25 +58,35 @@ public class ObstaclesCreation : MonoBehaviour
                 Vector2 pos = obs.transform.position;
                 if (pos == clickPos && !Wave.GetInstance().waveStarted)
                 {
-                    foreach (GameObject tower in PlaceTower.towerTiles)
+                    if (PlaceTower.towerTiles != null && PlaceTower.towerTiles.Count > 0)
                     {
-                        Vector2 posTower = tower.transform.position;
-                        if (posTower == clickPos)
+                        foreach (GameObject tower in PlaceTower.towerTiles)
                         {
-                            Debug.Log("Une tourelle est presente");
-                            error_msg.text = "Une tourelle est presente";
-                            break;
-                        }
-                        else
-                        {
-                            Destroy(obs);
-                            obstacleTiles.Remove(obs);
-                            error_msg.text = "Obstacle supprimé";
-                            break;
+                            Vector2 posTower = tower.transform.position;
+                            if (posTower == clickPos)
+                            {
+                                Debug.Log("Une tourelle est presente");
+                                error_msg.text = "Une tourelle est presente";
+                                break;
+                            }
+                            else
+                            {
+                                Destroy(obs);
+                                obstacleTiles.Remove(obs);
+                                error_msg.text = "Obstacle supprimé";
+                                break;
+                            }
                         }
                     }
+                    else
+                    {
+                        Destroy(obs);
+                        obstacleTiles.Remove(obs);
+                        error_msg.text = "Obstacle supprimé";
+                        break;
+                    }
                 }
-                else
+                else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted)
                 {
                     error_msg.text = "Vague en cours";
                 }

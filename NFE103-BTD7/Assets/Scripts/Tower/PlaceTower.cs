@@ -7,6 +7,7 @@ using TMPro;
 
 public class PlaceTower : MonoBehaviour
 {
+
     //@TODO mettre ? jour avec l'interface
     public GameObject obstacle;
 
@@ -16,7 +17,19 @@ public class PlaceTower : MonoBehaviour
 
     public static List<GameObject> towerTiles = new List<GameObject>();
 
-    public TextMeshProUGUI error_msg;
+    public static TextMeshProUGUI error_msg;
+
+    //private static PlaceTower _instance;
+
+    //void Awake()
+    //{
+    //    _instance = this;
+    //}
+
+    //public static PlaceTower GetInstance() {
+    //    return _instance; 
+    //}
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,22 +47,16 @@ public class PlaceTower : MonoBehaviour
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
 
-            checkClickOnObstacle(clickPos);
+            checkClickOnObstacleTower(clickPos);
         }
     }
 
 
 
-    private void checkClickOnObstacle(Vector2 clickPos)
+    public void checkClickOnObstacleTower(Vector2 clickPos)
     {
         int h = MapGenerator.GetInstance().Height;
         int w = MapGenerator.GetInstance().Width;
-
-        //if (1 == 1)
-        //{
-        //    createTower(clickPos);
-        //    Wave.GetInstance().placeTower = false;
-        //}
 
         //Placement impossible (hors grille, max obstacles, chemin bloqu?)
         if (
