@@ -20,6 +20,7 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] public float fireCountDown;
     [SerializeField] public float range;
     [SerializeField] public float damage;
+    [SerializeField] public int price;
     [SerializeField] public float zone;
     [SerializeField] public bool isPrefabRangeCreated = false;
     [SerializeField] public Transform target;
@@ -56,9 +57,9 @@ public abstract class Tower : MonoBehaviour
         float shortestDistanceToEnemy = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        for(int i=0; i< Wave.GetInstance().enemies.Count; i++)
+        for(int i=0; i< Wave.GetInstance().GetEnemiesCount(); i++)
         {
-            var enemy = Wave.GetInstance().enemies[i];
+            var enemy = Wave.GetInstance().GetEnemies(i);
             if (enemy != null)
             {
                 float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
@@ -91,6 +92,11 @@ public abstract class Tower : MonoBehaviour
         {
             target = null;
         }
+    }
+
+    public int GetPrice()
+    {
+        return price;
     }
     public void Shoot()
     {

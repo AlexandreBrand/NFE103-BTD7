@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public int GoldCoins;
     [SerializeField] TextMeshProUGUI Life;
     [SerializeField] TextMeshProUGUI Gold;
+    [SerializeField] TextMeshProUGUI ErrorMessage;
 
     void Awake()
     {
@@ -28,7 +29,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Life.text = LifePoints.ToString(); Gold.text = GoldCoins.ToString();
+        Life.text = LifePoints.ToString(); 
+        Gold.text = GoldCoins.ToString();
     }
 
     private void Update()
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
     {
         LifePoints = life;
     }
-    public void LooseLife(int life)
+    public void LoseLife(int life)
     {
         LifePoints -= life;
         if (LifePoints < 0)
@@ -60,9 +62,16 @@ public class Player : MonoBehaviour
         Gold.text = GoldCoins.ToString();
     }
 
-    public void SpendGold(int gold)
+    public bool SpendGold(int gold)
     {
+        int GoldSpend = GoldCoins - gold;
+        if(GoldSpend < 0)
+        {
+            ErrorMessage.text = "Solde insuffisant";
+            return false;
+        }
         GoldCoins -= gold;
         Gold.text = GoldCoins.ToString();
+        return true;
     }
 }

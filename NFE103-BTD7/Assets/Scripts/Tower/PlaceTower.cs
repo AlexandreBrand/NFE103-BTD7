@@ -28,7 +28,7 @@ public class PlaceTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Wave.GetInstance().placeTower)
+        if (Input.GetMouseButtonDown(0) && Wave.GetInstance().GetPlaceTower())
         {
             Vector2 clickPos = new Vector2(
                 Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
@@ -89,7 +89,7 @@ public class PlaceTower : MonoBehaviour
                             {
                                 Debug.Log("tourelle pos�");
                                 createTower(clickPos);
-                                Wave.GetInstance().placeTower = false;
+                                Wave.GetInstance().SetPlaceTower(false);
                             }
                         }
                     }
@@ -97,7 +97,7 @@ public class PlaceTower : MonoBehaviour
                     {
                         Debug.Log("tourelle pos� else");
                         createTower(clickPos);
-                        Wave.GetInstance().placeTower = false;
+                        Wave.GetInstance().SetPlaceTower(false);
                     }
                 }
             }
@@ -107,7 +107,10 @@ public class PlaceTower : MonoBehaviour
     private void createTower(Vector2 clickPos)
     {
         GameObject newTower = Instantiate(tower);
-        newTower.transform.position = clickPos;
-        towerTiles.Add(newTower);
+        if (Player.GetInstance().SpendGold(newTower.GetComponent<Tower>().GetPrice()))
+        {
+            newTower.transform.position = clickPos;
+            towerTiles.Add(newTower);
+        }   
     }
 }

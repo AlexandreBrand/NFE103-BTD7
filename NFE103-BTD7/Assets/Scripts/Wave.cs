@@ -78,7 +78,7 @@ public class Wave : MonoBehaviour
         //loseLife();
 
         double time = Time.time - lastTimeSpawn;
-        if (waveStarted && monsterNbr > monstersLeft && 0.3f < time)
+        if (waveStarted && monsterNbr > monstersLeft && 0.5f < time)
         {
             EnemySpawner();
         }  
@@ -137,6 +137,38 @@ public class Wave : MonoBehaviour
         enemies.Add(newEnemy);
     }
 
+    public GameObject GetEnemies(int position)
+    {
+        return enemies[position];
+    }
+    public int GetEnemiesCount()
+    {
+        return enemies.Count;
+    }
+    public bool GetPlaceTower()
+    {
+        return placeTower;
+    }
+
+    public void SetPlaceTower(bool value)
+    {
+        placeTower = value;
+    }
+
+    public void removeEnemy(GameObject enemy) 
+    {
+        if (enemy.tag == "Enemy")
+        {
+            enemies.Remove(enemy);
+            Destroy(enemy);
+        }
+    }
+
+    public void ModifMonsterLeft() 
+    {
+        monstersLeft--;
+    }
+
     public void StartWave()
     {
         monsterNbr = tanksNbr + knightNbr + assassinsNbr;
@@ -161,38 +193,6 @@ public class Wave : MonoBehaviour
             Time.timeScale = 1;
             paused = false;
             waveStateText.text = "PAUSE";
-        }
-    }
-
-    public void loseLife()
-    {
-        Vector2 endPos;
-        endPos = new Vector2(
-            MapGenerator.GetInstance().EndC.transform.position.x,
-            MapGenerator.GetInstance().EndC.transform.position.y);
-
-        foreach(GameObject g in enemies)
-        {
-            if (g != null)
-            {
-                double x = Math.Round(g.transform.position.x * 2);
-                double y = Math.Round(g.transform.position.y * 2);
-
-                Vector2 enemyPos;
-                enemyPos = new Vector2((float)x, (float)y);
-
-
-                if (enemyPos == endPos)
-                {
-                    int life = Player.GetInstance().LifePoints - g.GetComponent<IEnemy>().Damage;
-                    if (life < 0) { Player.GetInstance().LifePoints = 0; }
-                    else { Player.GetInstance().LifePoints = life; }
-                    enemies.Remove(g);
-                    Destroy(g);
-                    monstersLeft--;
-                    break;
-                }
-            }
         }
     }
 

@@ -21,10 +21,10 @@ public class EncCellScript : MonoBehaviour
         GameObject enemy = collision.gameObject;
         if (enemy.tag == "Enemy")
         {
-            Player.GetInstance().LooseLife(enemy.GetComponent<IEnemy>().Damage);
-            Wave.GetInstance().enemies.Remove(enemy);
-            Destroy(enemy);
-            Wave.GetInstance().monstersLeft--;
+            Player.GetInstance().LoseLife(enemy.GetComponent<IEnemy>().Damage); 
+            Wave.GetInstance().removeEnemy(enemy);
+            //Destroy(enemy);
+            Wave.GetInstance().ModifMonsterLeft();
         }
     }
 }
