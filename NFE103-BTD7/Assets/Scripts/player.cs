@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     public int GoldCoins;
     [SerializeField] TextMeshProUGUI Life;
     [SerializeField] TextMeshProUGUI Gold;
-    [SerializeField] TextMeshProUGUI ErrorMessage;
 
     void Awake()
     {
@@ -35,6 +34,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Life.text = LifePoints.ToString();
+        Gold.text = GoldCoins.ToString();
     }
 
     public void SetLife(int life)
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
         int GoldSpend = GoldCoins - gold;
         if(GoldSpend < 0)
         {
-            ErrorMessage.text = "Solde insuffisant";
+            Game.GetInstance().Message.text = "Solde insuffisant";
             return false;
         }
         GoldCoins -= gold;

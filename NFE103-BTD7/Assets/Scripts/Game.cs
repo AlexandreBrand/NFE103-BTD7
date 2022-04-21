@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class Game : MonoBehaviour
     private static Game _instance;
 
     [SerializeField] GameObject DifficultyPanel;
+    public TextMeshProUGUI Message;
     public bool GameStarted = false;
 
     void Awake()
@@ -37,8 +39,10 @@ public class Game : MonoBehaviour
         Wave.GetInstance().assassinsNbr = assassinNbr;
         Wave.GetInstance().bountyCoef = bountyCoef;
         Wave.GetInstance().monsterCoef = monsterCoef;
-        Player.GetInstance().SetLife(lifePts);
-        Player.GetInstance().SetGold(golds);
+        //Player.GetInstance().SetLife(lifePts);
+        //Player.GetInstance().SetGold(golds);
+        Player.GetInstance().LifePoints = lifePts;
+        Player.GetInstance().GoldCoins = golds;
 
         DifficultyPanel.SetActive(false);
     }

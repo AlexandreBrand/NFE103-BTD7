@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,6 @@ public class Wave : MonoBehaviour
 {
     private static Wave _instance;
 
-    
     public bool waveStarted;
     public bool paused;
     public bool quitMenu;
@@ -69,7 +68,6 @@ public class Wave : MonoBehaviour
         assassinsNbr = 1;
         knightNbr = 1;
         monsterCoef = 0;
-
     }
 
     private void Update()

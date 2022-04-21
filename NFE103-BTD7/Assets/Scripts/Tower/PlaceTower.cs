@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -17,21 +17,6 @@ public class PlaceTower : MonoBehaviour
 
     public static List<GameObject> towerTiles = new List<GameObject>();
 
-    public static TextMeshProUGUI error_msg;
-
-    //private static PlaceTower _instance;
-
-    //void Awake()
-    //{
-    //    _instance = this;
-    //}
-
-    //public static PlaceTower GetInstance() {
-    //    return _instance; 
-    //}
-
-
-    // Start is called before the first frame update
     void Start()
     {
         towerTiles.Clear();
@@ -65,7 +50,7 @@ public class PlaceTower : MonoBehaviour
             clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
         { Debug.Log("Placement impossible"); }
 
-        else if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
+        else if (Wave.GetInstance().waveStarted) { Game.GetInstance().Message.text = "Vague en cours"; }
 
         else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
         else if (Wave.GetInstance().diff_select)
@@ -89,12 +74,13 @@ public class PlaceTower : MonoBehaviour
                             Vector2 posTower = tower.transform.position;
                             if (posTower == clickPos)
                             {
-                                error_msg.text = "Une tourelle est deja presente";
+                                Game.GetInstance().Message.text = "Il y a déjà une tourelle";
                                 break;
                             }
                             else
                             {
-                                Debug.Log("tourelle pos�");
+                                Game.GetInstance().Message.text = "Tourelle placée";
+                                Debug.Log("Tourelle placée");
                                 createTower(clickPos);
                                 Wave.GetInstance().SetPlaceTower(false);
                             }
@@ -102,7 +88,8 @@ public class PlaceTower : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("tourelle pos� else");
+                        Game.GetInstance().Message.text = "Tourelle placée";
+                        Debug.Log("Tourelle placée else");
                         createTower(clickPos);
                         Wave.GetInstance().SetPlaceTower(false);
                         Wave.GetInstance().placeTower = false;

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -11,8 +11,6 @@ public class ObstaclesCreation : MonoBehaviour
     private new BoxCollider2D collider;
     public GameObject obstacle;
     public static List<GameObject> obstacleTiles = new List<GameObject>();
-
-    public TextMeshProUGUI error_msg;
     public TextMeshProUGUI obs_restants;
 
 
@@ -21,7 +19,7 @@ public class ObstaclesCreation : MonoBehaviour
         obstacleTiles.Clear();
         obs_restants.text = "Obstacles restants : " + Wave.GetInstance().maxObstacles.ToString();
         collider = GetComponent<BoxCollider2D>();
-        error_msg.text = "Placez des obstacles";
+        Game.GetInstance().Message.text = "Placez des obstacles";
     }
 
 
@@ -38,7 +36,7 @@ public class ObstaclesCreation : MonoBehaviour
             checkClickObstacle(clickPos);
 
         }
-        if (Wave.GetInstance().waveStarted) { error_msg.text = "Vague en cours"; }
+        if (Wave.GetInstance().waveStarted) { Game.GetInstance().Message.text = "Vague en cours"; }
         obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
     }
 
@@ -48,26 +46,10 @@ public class ObstaclesCreation : MonoBehaviour
         int w = MapGenerator.GetInstance().Width;
         bool hasCollied = false;
 
-        //GraphNode node1 = AstarPath.active.GetNearest(MapGenerator.GetInstance().StartC.transform.position, NNConstraint.Default).node;
-        //GraphNode node2 = AstarPath.active.GetNearest(MapGenerator.GetInstance().EndC.transform.position, NNConstraint.Default).node;
 
-        //Cellule occupée
-        //if (collider != Physics2D.OverlapPoint(clickPos) && collider != null)
-
-        if (Wave.GetInstance().diff_select) { /*Debug.Log("Menu Sélection de la difficulté actif");*/ }
-        else if (
-            obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || //Max d'obstacles placés
-            obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloquée
-            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
-        { /*Debug.Log("Placement impossible");*/  }
-        else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted) { error_msg.text = "Vague en cours"; }
-        else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/
-        }
-        /*else if (PathUtilities.IsPathPossible(node1, node2))
-        {
-            Debug.Log("chemin possible");
-            createObstacle(clickPos);
-        }*/
+        if (obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || checkPath(clickPos) || Wave.GetInstance().quitMenu) { }
+        else if (Game.GetInstance().GameStarted) { Game.GetInstance().Message.text = "Vague en cours"; }
+        //else if (Wave.GetInstance().quitMenu) { }
 
         //Cellule libre - OK pour placement
         else
@@ -84,8 +66,7 @@ public class ObstaclesCreation : MonoBehaviour
                             Vector2 posTower = tower.transform.position;
                             if (posTower == clickPos)
                             {
-                                Debug.Log("Une tourelle est presente");
-                                error_msg.text = "Une tourelle est presente";
+                                Game.GetInstance().Message.text = "Il ya déjà une tourelle";
                                 hasCollied = true;
                                 break;
                             }
@@ -93,7 +74,7 @@ public class ObstaclesCreation : MonoBehaviour
                             {
                                 Destroy(obs);
                                 obstacleTiles.Remove(obs);
-                                error_msg.text = "Obstacle supprimé";
+                                Game.GetInstance().Message.text = "Obstacle supprimé";
                                 hasCollied = true;
                                 break;
                             }
@@ -103,15 +84,11 @@ public class ObstaclesCreation : MonoBehaviour
                     {
                         Destroy(obs);
                         obstacleTiles.Remove(obs);
-                        error_msg.text = "Obstacle supprimé";
+                        Game.GetInstance().Message.text = "Obstacle supprimé";
                         hasCollied = true;
                         break;
                     }
                 }
-                //else if (Wave.GetInstance().waveStarted && Game.GetInstance().GameStarted)
-                //{
-                //    error_msg.text = "Vague en cours";
-                //}
             }
             if (!hasCollied)
             {
@@ -120,12 +97,31 @@ public class ObstaclesCreation : MonoBehaviour
         }
     }
 
+    private bool checkPath(Vector2 clickPos)
+    {
+        //TODO test si le placement va bloquer le chemin
+
+        int h = MapGenerator.GetInstance().Height;
+        int w = MapGenerator.GetInstance().Width;
+
+        if (clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h)
+        {
+            return true; //Hors de la map
+        }
+        
+        if (obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1)
+        {
+            return true; // Colonne bloquée
+        }
+        return false;
+    }
+
     private void createObstacle(Vector2 clickPos)
     {
         GameObject newObstacle = Instantiate(obstacle);
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
-        error_msg.text = "Obstacle placé";
+        Game.GetInstance().Message.text = "Obstacle placé";
         AstarPath.active.Scan();
     }
 }

@@ -460,7 +460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
-  error_msg: {fileID: 1082763718}
   obs_restants: {fileID: 135039645}
 --- !u!1839735485 &218452644
 Tilemap:
@@ -2910,6 +2909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DifficultyPanel: {fileID: 1458956027}
+  Message: {fileID: 1082763718}
   GameStarted: 0
 --- !u!114 &218452647
 MonoBehaviour:
@@ -3003,6 +3003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
+  tower: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0

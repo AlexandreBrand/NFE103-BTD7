@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,10 +37,10 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
-        Debug.Log("try to destroy");
         Destroy(gameObject);
         //A supprimer test sans vie
         Destroy(target.gameObject);
+        Wave.GetInstance().monstersLeft--;
     }
 
     public void Seek(Transform _target)
