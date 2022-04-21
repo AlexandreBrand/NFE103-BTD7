@@ -39,11 +39,8 @@ public class Game : MonoBehaviour
         Wave.GetInstance().assassinsNbr = assassinNbr;
         Wave.GetInstance().bountyCoef = bountyCoef;
         Wave.GetInstance().monsterCoef = monsterCoef;
-        //Player.GetInstance().SetLife(lifePts);
-        //Player.GetInstance().SetGold(golds);
-        Player.GetInstance().LifePoints = lifePts;
-        Player.GetInstance().GoldCoins = golds;
-
+        Player.GetInstance().SetLife(lifePts);
+        Player.GetInstance().SetGold(golds);
         DifficultyPanel.SetActive(false);
     }
 }

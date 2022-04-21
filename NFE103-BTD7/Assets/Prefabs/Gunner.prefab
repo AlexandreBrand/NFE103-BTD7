@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3738164190499116647}
   - component: {fileID: -2483547572046447962}
   - component: {fileID: -8338389303784515372}
+  - component: {fileID: 8408323663119799247}
   m_Layer: 0
   m_Name: Gunner
   m_TagString: Untagged
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3625043607559282579, guid: 95c0812bb96bb8147a11f0e719762baf, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.22137332, a: 1}
+  m_Sprite: {fileID: 1483922166413327032, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -100,6 +101,7 @@ MonoBehaviour:
   fireCountDown: 0
   range: 12
   damage: 10
+  price: 0
   zone: 0
   isPrefabRangeCreated: 0
   target: {fileID: 0}
@@ -126,7 +128,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
+    oldSize: {x: 0.609375, y: 0.515625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
@@ -135,3 +137,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &8408323663119799247
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754805289626492114}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ab5e191a1aaa42a79105d5303f6d97c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

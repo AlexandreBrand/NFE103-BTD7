@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8799477731777040423}
   - component: {fileID: -5115272023863016606}
   - component: {fileID: 5279538178281870112}
+  - component: {fileID: 4480829196866665044}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -72,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: b4700700d1e0f3a428df9a5d75c80daa, type: 3}
-  m_Color: {r: 0, g: 0.9765997, b: 1, a: 1}
+  m_Sprite: {fileID: 4109675062087912720, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,3 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!95 &4480829196866665044
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5904016218627442040}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43a147c1758b346968ea6decd1c1836b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

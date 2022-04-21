@@ -10,28 +10,30 @@ public class Wave : MonoBehaviour
 {
     private static Wave _instance;
 
-    public bool waveStarted;
-    public bool paused;
-    public bool quitMenu;
-    public bool spawned;
+    public bool waveStarted = false;
+    public bool paused = false;
+    public bool quitMenu = false;
+    public bool spawned = false;
+    public bool placeTower = false;
+    public bool diff_select = true;
 
     public int waveNumber;
-    public double maxObstacles;
-    public int waveEndBounty;
-    public bool diff_select;
-    public double bountyCoef;
+    public double maxObstacles = 0;
+    public int waveEndBounty = 0;
+    public double bountyCoef = 0;
+    public double monsterCoef = 0;
 
     public int monsterNbr;
     public int tanksNbr;
     public int tanksLeft;
     public int assassinsNbr;
-    public int assassinsLeft;
-    public int knightNbr;
-    public int knightLeft;
-    public int monstersLeft;
-    public double monsterCoef;
+    public int assassinsLeft = 0;
+    public int knightNbr = 0;
+    public int knightLeft = 0;
+    public int monstersLeft = 0;
+    public int spawnedMonsters = 0;
 
-    public bool placeTower = false;
+    
     
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
@@ -46,28 +48,14 @@ public class Wave : MonoBehaviour
 
     private void Start()
     {
-        waveStarted = false;
-        paused = false;
-        quitMenu = false;
-        spawned = false;
-
         waveNumber = 1;
-        maxObstacles = 0;
-        waveEndBounty = 0;
-        bountyCoef = 0;
-        diff_select = true;
-
-        monstersLeft = 0;
-        assassinsLeft = 0;
-        knightLeft = 0;
-        tanksLeft = 0;
-        lastTimeSpawn = Time.time;
         waveLvL.text = "LvL 1";
+        lastTimeSpawn = Time.time;
+
         monsterNbr = tanksNbr+knightNbr+assassinsNbr;
         tanksNbr = 1;
         assassinsNbr = 1;
         knightNbr = 1;
-        monsterCoef = 0;
     }
 
     private void Update()
@@ -87,7 +75,8 @@ public class Wave : MonoBehaviour
 
     public void EnemySpawner()
     {
-        int rand = UnityEngine.Random.Range(1,4);
+        int types_nbr = Enum.GetNames(typeof(EnemyType)).Length;
+        int rand = UnityEngine.Random.Range(1,types_nbr+1);
         
         switch (rand)
         {
@@ -95,7 +84,7 @@ public class Wave : MonoBehaviour
                 if(assassinsLeft < assassinsNbr)
                 {
                     CreateEnemy(EnemyType.Bloodthirsty);
-                    assassinsLeft++;
+                    assassinsLeft++; spawnedMonsters++;
                 }
                 break;
 
@@ -103,23 +92,18 @@ public class Wave : MonoBehaviour
                 if (knightLeft < knightNbr)
                 {
                     CreateEnemy(EnemyType.Knight);
-                    knightLeft++;
+                    knightLeft++; spawnedMonsters++;
                 }
                 break;
             case 3:
                 if (tanksLeft < tanksNbr)
                 {
                     CreateEnemy(EnemyType.Tank);
-                    tanksLeft++;
+                    tanksLeft++; spawnedMonsters++;
                 }
                 break;
 
             default:
-                if (assassinsLeft < assassinsNbr)
-                {
-                    CreateEnemy(EnemyType.Bloodthirsty);
-                    assassinsLeft++;
-                }
                 break;
         }  
     }
@@ -131,6 +115,7 @@ public class Wave : MonoBehaviour
         lastTimeSpawn = Time.time;
         monstersLeft++;
         spawned = true;
+        spawnedMonsters++;
 
         enemies.Add(newEnemy);
     }
@@ -212,8 +197,10 @@ public class Wave : MonoBehaviour
         assassinsLeft = 0;
 
         waveNumber++;
+        waveLvL.text = "LvL " + waveNumber.ToString();
         waveStarted = false;
         spawned = false;
+        Game.GetInstance().Message.text = "";
     }
 
     public void endWave()
@@ -224,7 +211,7 @@ public class Wave : MonoBehaviour
             if (Player.GetInstance().LifePoints <= 0) { Game.GetInstance().Lost(); }
 
             //Tous les ennemis battus
-            else if (monstersLeft == 0)
+            else if (monstersLeft == 0 && spawnedMonsters == monsterNbr)
             {
                 winWave();
             }
