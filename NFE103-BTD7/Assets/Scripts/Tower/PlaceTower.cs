@@ -43,21 +43,10 @@ public class PlaceTower : MonoBehaviour
         int h = MapGenerator.GetInstance().Height;
         int w = MapGenerator.GetInstance().Width;
 
-        //Placement impossible (hors grille, max obstacles, chemin bloqu?)
-        if (
-            towerTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloqu?e
-            towerTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1 || //Colonne bloqu?e
-            clickPos.x < 0 || clickPos.y < 0 || clickPos.x >= w || clickPos.y >= h) // Hors de la grille
-        { Debug.Log("Placement impossible"); }
+        if (Wave.GetInstance().quitMenu || Wave.GetInstance().diff_select) { }
 
         else if (Wave.GetInstance().waveStarted) { Game.GetInstance().Message.text = "Vague en cours"; }
 
-        else if (Wave.GetInstance().quitMenu) { /*Debug.Log("Menu Quitter la partie actif");*/}
-        else if (Wave.GetInstance().diff_select)
-        { }
-
-        //check if on osbtacle
-        //else if (collider != Physics2D.OverlapPoint(clickPos))
         else
         {
             foreach (GameObject obs in ObstaclesCreation.obstacleTiles)
@@ -83,6 +72,7 @@ public class PlaceTower : MonoBehaviour
                                 Debug.Log("Tourelle placée");
                                 createTower(clickPos);
                                 Wave.GetInstance().SetPlaceTower(false);
+                                break;
                             }
                         }
                     }

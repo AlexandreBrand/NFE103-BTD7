@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEditor.VersionControl;
 
 public class Wave : MonoBehaviour
 {
@@ -13,25 +14,25 @@ public class Wave : MonoBehaviour
     public bool waveStarted = false;
     public bool paused = false;
     public bool quitMenu = false;
-    public bool spawned = false;
     public bool placeTower = false;
     public bool diff_select = true;
 
-    public int waveNumber;
     public double maxObstacles = 0;
     public int waveEndBounty = 0;
     public double bountyCoef = 0;
     public double monsterCoef = 0;
 
-    public int monsterNbr;
-    public int tanksNbr;
-    public int tanksLeft;
-    public int assassinsNbr;
-    public int assassinsLeft = 0;
+    public int tanksNbr = 0;
+    public int assassinsNbr = 0;
     public int knightNbr = 0;
-    public int knightLeft = 0;
-    public int monstersLeft = 0;
-    public int spawnedMonsters = 0;
+
+    private int waveNumber;
+    private int monsterNbr;
+    private int tanksLeft;
+    private int assassinsLeft = 0;
+    private int knightLeft = 0;
+    private int monstersLeft = 0;
+    private int spawnedMonsters = 0;
 
     
     
@@ -53,21 +54,16 @@ public class Wave : MonoBehaviour
         lastTimeSpawn = Time.time;
 
         monsterNbr = tanksNbr+knightNbr+assassinsNbr;
-        tanksNbr = 1;
-        assassinsNbr = 1;
-        knightNbr = 1;
+
     }
 
     private void Update()
     {
-        endWave();
-        //loseLife();
-
         double time = Time.time - lastTimeSpawn;
         if (waveStarted && monsterNbr > monstersLeft && 0.5f < time)
         {
             EnemySpawner();
-        }  
+        }
     }
 
     public static Wave GetInstance() { return _instance; }
@@ -84,7 +80,7 @@ public class Wave : MonoBehaviour
                 if(assassinsLeft < assassinsNbr)
                 {
                     CreateEnemy(EnemyType.Bloodthirsty);
-                    assassinsLeft++; spawnedMonsters++;
+                    assassinsLeft++;
                 }
                 break;
 
@@ -92,14 +88,14 @@ public class Wave : MonoBehaviour
                 if (knightLeft < knightNbr)
                 {
                     CreateEnemy(EnemyType.Knight);
-                    knightLeft++; spawnedMonsters++;
+                    knightLeft++;
                 }
                 break;
             case 3:
                 if (tanksLeft < tanksNbr)
                 {
                     CreateEnemy(EnemyType.Tank);
-                    tanksLeft++; spawnedMonsters++;
+                    tanksLeft++;
                 }
                 break;
 
@@ -114,7 +110,6 @@ public class Wave : MonoBehaviour
         newEnemy.transform.position = MapGenerator.GetInstance().StartC.transform.position;
         lastTimeSpawn = Time.time;
         monstersLeft++;
-        spawned = true;
         spawnedMonsters++;
 
         enemies.Add(newEnemy);
@@ -159,6 +154,7 @@ public class Wave : MonoBehaviour
         waveStateText.text = "PAUSE";
         waveLvL.text = "LvL " + waveNumber.ToString();
         waveStarted = true;
+        GetComponent<ObstaclesCreation>().obs_restants.text = "";
     }
 
     public void PauseOrResumeWave()
@@ -195,27 +191,24 @@ public class Wave : MonoBehaviour
         tanksLeft = 0;
         knightLeft = 0;
         assassinsLeft = 0;
+        spawnedMonsters = 0;
 
         waveNumber++;
         waveLvL.text = "LvL " + waveNumber.ToString();
         waveStarted = false;
-        spawned = false;
         Game.GetInstance().Message.text = "";
     }
 
     public void endWave()
     {
-        if (spawned)
+        if (Game.GetInstance().GameStarted)
         {
             //Plus de points de vie
-            if (Player.GetInstance().LifePoints <= 0) { Game.GetInstance().Lost(); }
+            if (Player.GetInstance().LifePoints <= 0) Game.GetInstance().Lost();
 
             //Tous les ennemis battus
-            else if (monstersLeft == 0 && spawnedMonsters == monsterNbr)
-            {
-                winWave();
-            }
-        }
+            else if (monstersLeft == 0 && spawnedMonsters == monsterNbr) winWave();
 
+        }
     }
 }

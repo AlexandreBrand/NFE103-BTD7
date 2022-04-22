@@ -42,5 +42,6 @@ public class Game : MonoBehaviour
         Player.GetInstance().SetLife(lifePts);
         Player.GetInstance().SetGold(golds);
         DifficultyPanel.SetActive(false);
+        GetComponent<ObstaclesCreation>().obs_restants.text = "Obstacles restants : " + Wave.GetInstance().maxObstacles.ToString();
     }
 }

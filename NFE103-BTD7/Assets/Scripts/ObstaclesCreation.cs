@@ -17,7 +17,6 @@ public class ObstaclesCreation : MonoBehaviour
     void Start()
     {
         obstacleTiles.Clear();
-        obs_restants.text = "Obstacles restants : " + Wave.GetInstance().maxObstacles.ToString();
         collider = GetComponent<BoxCollider2D>();
         Game.GetInstance().Message.text = "Placez des obstacles";
     }
@@ -25,7 +24,12 @@ public class ObstaclesCreation : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0) && !Wave.GetInstance().placeTower)
+        onClick();
+    }
+
+
+    private void onClick()
+    {
         if (Input.GetMouseButtonDown(0) && !Wave.GetInstance().placeTower)
         {
             Vector2 clickPos;
@@ -36,20 +40,21 @@ public class ObstaclesCreation : MonoBehaviour
             checkClickObstacle(clickPos);
 
         }
+
         if (Wave.GetInstance().waveStarted) { Game.GetInstance().Message.text = "Vague en cours"; }
-        obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
     }
+
 
     private void checkClickObstacle(Vector2 clickPos)
     {
-        int h = MapGenerator.GetInstance().Height;
-        int w = MapGenerator.GetInstance().Width;
         bool hasCollied = false;
 
-
-        if (obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 || checkPath(clickPos) || Wave.GetInstance().quitMenu) { }
-        else if (Game.GetInstance().GameStarted) { Game.GetInstance().Message.text = "Vague en cours"; }
-        //else if (Wave.GetInstance().quitMenu) { }
+        if (
+            obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 ||
+            checkPath(clickPos) ||
+            Wave.GetInstance().quitMenu ||
+            Game.GetInstance().GameStarted
+            ) { }
 
         //Cellule libre - OK pour placement
         else
@@ -66,7 +71,7 @@ public class ObstaclesCreation : MonoBehaviour
                             Vector2 posTower = tower.transform.position;
                             if (posTower == clickPos)
                             {
-                                Game.GetInstance().Message.text = "Il ya déjà une tourelle";
+                                Game.GetInstance().Message.text = "Il y a déjà une tourelle";
                                 hasCollied = true;
                                 break;
                             }
@@ -75,6 +80,7 @@ public class ObstaclesCreation : MonoBehaviour
                                 Destroy(obs);
                                 obstacleTiles.Remove(obs);
                                 Game.GetInstance().Message.text = "Obstacle supprimé";
+                                obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
                                 hasCollied = true;
                                 break;
                             }
@@ -93,6 +99,7 @@ public class ObstaclesCreation : MonoBehaviour
             if (!hasCollied)
             {
                 createObstacle(clickPos);
+                obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
             }
         }
     }

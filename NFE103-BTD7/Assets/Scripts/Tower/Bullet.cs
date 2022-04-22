@@ -40,7 +40,8 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
         //A supprimer test sans vie
         Destroy(target.gameObject);
-        Wave.GetInstance().monstersLeft--;
+        Wave.GetInstance().ModifMonsterLeft();
+        Wave.GetInstance().endWave();
     }
 
     public void Seek(Transform _target)

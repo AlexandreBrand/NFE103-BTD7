@@ -13,6 +13,7 @@ public class EncCellScript : MonoBehaviour
             Wave.GetInstance().removeEnemy(enemy);
             //Destroy(enemy);
             Wave.GetInstance().ModifMonsterLeft();
+            Wave.GetInstance().endWave();
         }
     }
 }

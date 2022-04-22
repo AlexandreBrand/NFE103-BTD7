@@ -314,7 +314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'OBSTACLES RESTANTS : 30'
+  m_text: 'Obstacles restants :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -2876,23 +2876,15 @@ MonoBehaviour:
   waveStarted: 0
   paused: 0
   quitMenu: 0
-  spawned: 0
   placeTower: 0
   diff_select: 0
-  waveNumber: 0
   maxObstacles: 0
   waveEndBounty: 0
   bountyCoef: 0
   monsterCoef: 0
-  monsterNbr: 0
   tanksNbr: 0
-  tanksLeft: 0
   assassinsNbr: 0
-  assassinsLeft: 0
   knightNbr: 0
-  knightLeft: 0
-  monstersLeft: 0
-  spawnedMonsters: 0
   waveStateText: {fileID: 424563455}
   waveLvL: {fileID: 831083924}
   lastTimeSpawn: 0
@@ -3420,7 +3412,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3431,8 +3423,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: -5083054408824618094, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+    m_SelectedSprite: {fileID: 1483922166413327032, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3477,7 +3469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8079361998373804338, guid: 81ad51f1f44884f4080cd0e90e2b3820, type: 3}
+  m_Sprite: {fileID: 1483922166413327032, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4386,7 +4378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TOWER 1
+  m_text: PLANTE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
