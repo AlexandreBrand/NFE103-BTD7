@@ -103,7 +103,6 @@ public class ObstaclesCreation : MonoBehaviour
                 Vector2 posTower = tower.transform.position;
                 if (posTower == clickPos)
                 {
-                    Game.GetInstance().Message.text = "Vendez la tourelle pour pouvoir retirer l'obstacle";
                     hasCollied = true;
                     return true;
                 }

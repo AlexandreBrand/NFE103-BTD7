@@ -52,7 +52,7 @@ public class PlaceTower : MonoBehaviour
 
     public void UpdateTowerPanel(int level, int price)
     {
-        levelText.text = "lvl " + level;
+        levelText.text = "LvL " + level;
         upgradePriceText.text = price + " g";
     }
 

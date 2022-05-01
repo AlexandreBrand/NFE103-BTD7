@@ -36,7 +36,8 @@ public class Wave : MonoBehaviour
 
     public GameObject selectedTower;
     
-    public TextMeshProUGUI waveStateText;
+    public Button Play;
+    public Button Pause;
     public TextMeshProUGUI waveLvL;
     public float lastTimeSpawn;
 
@@ -152,7 +153,8 @@ public class Wave : MonoBehaviour
         AstarPath.active.Scan();
         monsterNbr = tanksNbr + knightNbr + assassinsNbr;
         Game.GetInstance().GameStarted = true;
-        waveStateText.text = "PAUSE";
+        Play.gameObject.SetActive(false);
+        Pause.gameObject.SetActive(true);
         waveLvL.text = "LvL " + waveNumber.ToString();
         waveStarted = true;
         GetComponent<ObstaclesCreation>().obs_restants.text = "";
@@ -165,21 +167,24 @@ public class Wave : MonoBehaviour
         {
             Time.timeScale = 0;
             paused = true;
-            waveStateText.text = "RESUME";
+            Play.gameObject.SetActive(true);
+            Pause.gameObject.SetActive(false);
         }
         //Reprendre
         else if (paused)
         {
             Time.timeScale = 1;
             paused = false;
-            waveStateText.text = "PAUSE";
+            Play.gameObject.SetActive(false);
+            Pause.gameObject.SetActive(true);
         }
     }
 
     public void winWave()
     {
-        
-        waveStateText.text = "START";
+
+        Play.gameObject.SetActive(true);
+        Pause.gameObject.SetActive(false);
 
         Player.GetInstance().GoldCoins += waveEndBounty;
 
