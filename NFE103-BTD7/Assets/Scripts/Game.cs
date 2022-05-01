@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
 {
     private static Game _instance;
 
-    [SerializeField] public static GameObject DifficultyPanel;
+    [SerializeField] GameObject DifficultyPanel;
     public TextMeshProUGUI Message;
     public bool GameStarted = false;
 
@@ -21,7 +21,7 @@ public class Game : MonoBehaviour
 
     public void Start()
     {
-        DifficultyPanel = GameObject.FindGameObjectWithTag("DifficultyPanel");
+
     }
 
     public static Game GetInstance()

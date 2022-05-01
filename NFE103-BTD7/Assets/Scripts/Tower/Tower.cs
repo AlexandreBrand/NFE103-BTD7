@@ -32,8 +32,6 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] public GameObject rangePrefab;
     [SerializeField] public Color32 rangePrefabColor;
 
-    [SerializeField] public static GameObject towerPanel;
-
     public int level;
 
     //public static GameObject getTowerPanelInstance()
@@ -56,9 +54,6 @@ public abstract class Tower : MonoBehaviour
         rangePrefabColor = rangePrefab.GetComponent<Renderer>().sharedMaterial.color;
         
         level = 1;
-
-        towerPanel = GameObject.FindGameObjectWithTag("TowerPanel");
-        towerPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -179,20 +174,20 @@ public abstract class Tower : MonoBehaviour
                 if (Wave.GetInstance().selectedTower == towerGO)
                 {
                     Wave.GetInstance().selectedTower = null;
-                    towerPanel.SetActive(false);
+                    PlaceTower.GetInstance().towerPanel.SetActive(false);
                     rangePrefab.GetComponent<Renderer>().enabled = false;
                 }
                 else
                 {
                     Wave.GetInstance().selectedTower = towerGO;
-                    towerPanel.SetActive(true);
+                    PlaceTower.GetInstance().towerPanel.SetActive(true);
                     rangePrefab.GetComponent<Renderer>().enabled = true;
                 }
             }
             else
             {
                 Wave.GetInstance().selectedTower = null;
-                towerPanel.SetActive(false);
+                PlaceTower.GetInstance().towerPanel.SetActive(false);
                 rangePrefab.GetComponent<Renderer>().enabled = false;
             }
         }
@@ -216,6 +211,8 @@ public abstract class Tower : MonoBehaviour
         PlaceTower.towerTiles.Remove(Wave.GetInstance().selectedTower);
         Destroy(Wave.GetInstance().selectedTower);
         Destroy(rangePrefab);
+        Wave.GetInstance().selectedTower = null;
+        PlaceTower.GetInstance().towerPanel.SetActive(false);
     }
 
     private void OnMouseEnter()

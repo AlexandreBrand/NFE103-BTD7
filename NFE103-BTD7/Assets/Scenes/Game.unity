@@ -2902,6 +2902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630d9a48c98304e1ab49aa6ef9b4b170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DifficultyPanel: {fileID: 1532342979}
   Message: {fileID: 1082763718}
   GameStarted: 0
 --- !u!114 &218452647
@@ -2918,6 +2919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
   tower: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
+  towerPanel: {fileID: 961921667}
   levelText: {fileID: 1520961000}
   upgradePriceText: {fileID: 1172487248}
 --- !u!114 &218452648
@@ -5190,7 +5192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &961921668
 RectTransform:
   m_ObjectHideFlags: 0

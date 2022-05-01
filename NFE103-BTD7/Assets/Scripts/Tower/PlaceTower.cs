@@ -17,6 +17,8 @@ public class PlaceTower : MonoBehaviour
 
     public static List<GameObject> towerTiles = new List<GameObject>();
 
+    [SerializeField] public GameObject towerPanel;
+
     [SerializeField] public TextMeshProUGUI levelText;
     [SerializeField] public TextMeshProUGUI upgradePriceText;
 
