@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 218452645}
   - component: {fileID: 218452646}
   - component: {fileID: 218452647}
+  - component: {fileID: 218452651}
   - component: {fileID: 218452648}
   - component: {fileID: 218452650}
   m_Layer: 0
@@ -2808,6 +2809,7 @@ MonoBehaviour:
   paused: 0
   quitMenu: 0
   placeTower: 0
+  choosedTower: 0
   diff_select: 0
   maxObstacles: 0
   waveEndBounty: 0
@@ -2851,7 +2853,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacle: {fileID: 2321638045702465051, guid: 0ba8fc53d8f5b4cf9a63b7c9943c20b2, type: 3}
-  tower: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
   towerPanel: {fileID: 961921667}
   levelText: {fileID: 2144621123}
   upgradePriceText: {fileID: 596168172}
@@ -2934,6 +2935,22 @@ MonoBehaviour:
   GoldCoins: 0
   Life: {fileID: 1685869225}
   Gold: {fileID: 1379495677}
+--- !u!114 &218452651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218452640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e84781a5cd48424193f7e12967ba904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabGatling: {fileID: 6789906284253363926, guid: 0a720b7edea5ad54c886be607a7a39c1, type: 3}
+  PrefabGunner: {fileID: 4754805289626492114, guid: 85413f5ac3eceb94a828491b159ca572, type: 3}
+  PrefabRocket: {fileID: 8015123634318320153, guid: 39184ad53b615394bb557823c0858fac, type: 3}
+  PrefabSniper: {fileID: 4030392373418380669, guid: e8c42236cedd99f43b5fd8a32935b29f, type: 3}
 --- !u!1 &220015130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,7 +3082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TOWER 3
+  m_text: ROCKET
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -3228,7 +3245,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 295894460}
         m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
-        m_MethodName: PlaceTower
+        m_MethodName: chooseGunner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3375,6 +3392,7 @@ GameObject:
   - component: {fileID: 403030663}
   - component: {fileID: 403030662}
   - component: {fileID: 403030661}
+  - component: {fileID: 403030664}
   m_Layer: 5
   m_Name: Button Tower 4
   m_TagString: GameButton
@@ -3421,7 +3439,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3432,8 +3450,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 8828916258685364853, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+    m_SelectedSprite: {fileID: 2328092944829465269, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3445,7 +3463,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 403030662}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 403030664}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: chooseSniper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &403030662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3466,7 +3496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8079361998373804338, guid: 81ad51f1f44884f4080cd0e90e2b3820, type: 3}
+  m_Sprite: {fileID: 8828916258685364853, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3484,6 +3514,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403030659}
   m_CullTransparentMesh: 1
+--- !u!114 &403030664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403030659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd93d9474cb37fb4ea3d0cf9e5732f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &430354507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,7 +4887,7 @@ RectTransform:
   - {fileID: 1228607342}
   - {fileID: 2144621122}
   m_Father: {fileID: 447328635}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.012}
   m_AnchorMax: {x: 1, y: 0.20300001}
@@ -5282,6 +5324,7 @@ GameObject:
   - component: {fileID: 1176256934}
   - component: {fileID: 1176256933}
   - component: {fileID: 1176256932}
+  - component: {fileID: 1176256935}
   m_Layer: 5
   m_Name: Button Tower 3
   m_TagString: GameButton
@@ -5328,7 +5371,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5339,8 +5382,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: -3441271658919650106, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+    m_SelectedSprite: {fileID: -5477192048099171161, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -5352,7 +5395,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1176256933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1176256935}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: chooseRocket
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1176256933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5373,7 +5428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8079361998373804338, guid: 81ad51f1f44884f4080cd0e90e2b3820, type: 3}
+  m_Sprite: {fileID: -3441271658919650106, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5391,6 +5446,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176256930}
   m_CullTransparentMesh: 1
+--- !u!114 &1176256935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176256930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd93d9474cb37fb4ea3d0cf9e5732f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1228607341
 GameObject:
   m_ObjectHideFlags: 0
@@ -6526,7 +6593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TOWER 2
+  m_text: BOO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -6710,7 +6777,7 @@ Transform:
   m_LocalScale: {x: 3.9503582, y: 3.1017268, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1520960998
 GameObject:
@@ -6738,7 +6805,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546018828}
+  m_GameObject: {fileID: 1520960998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -6758,7 +6825,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546018828}
+  m_GameObject: {fileID: 1520960998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33c8dccb03efd46768f40ea16a0d7f20, type: 3}
@@ -6770,7 +6837,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546018828}
+  m_GameObject: {fileID: 1520960998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -6826,7 +6893,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546018828}
+  m_GameObject: {fileID: 1520960998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -6856,7 +6923,7 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546018828}
+  m_GameObject: {fileID: 1520960998}
   m_CullTransparentMesh: 1
 --- !u!1 &1581214302
 GameObject:
@@ -7061,82 +7128,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VENDRE
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 1
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 0.6189036, g: 0.66181254, b: 0.7169812, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 0.56554824, g: 0.6003026, b: 0.6698113, a: 1}
-    bottomRight: {r: 0.5927376, g: 0.6305847, b: 0.6792453, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 1024
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -18.684284}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  m_FontData:
+    m_Font: {fileID: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!222 &1591711770
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584538504}
+  m_GameObject: {fileID: 1591711767}
   m_CullTransparentMesh: 1
 --- !u!1 &1609633564
 GameObject:
@@ -7150,6 +7162,7 @@ GameObject:
   - component: {fileID: 1609633568}
   - component: {fileID: 1609633567}
   - component: {fileID: 1609633566}
+  - component: {fileID: 1609633569}
   m_Layer: 5
   m_Name: Button Tower 2
   m_TagString: GameButton
@@ -7207,8 +7220,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 1483922166413327032, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
-    m_SelectedSprite: {fileID: 1483922166413327032, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+    m_PressedSprite: {fileID: -6496644333540036390, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
+    m_SelectedSprite: {fileID: -3871982877336520260, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7220,7 +7233,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1609633567}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1609633569}
+        m_TargetAssemblyTypeName: TowerButton, Assembly-CSharp
+        m_MethodName: chooseGatling
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1609633567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7241,7 +7266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8079361998373804338, guid: 81ad51f1f44884f4080cd0e90e2b3820, type: 3}
+  m_Sprite: {fileID: -6496644333540036390, guid: 263a4f555223f49d2b4ab07fe951143e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7259,6 +7284,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609633564}
   m_CullTransparentMesh: 1
+--- !u!114 &1609633569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609633564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd93d9474cb37fb4ea3d0cf9e5732f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1614743238
 GameObject:
   m_ObjectHideFlags: 0
@@ -7316,7 +7353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TOWER 4
+  m_text: BIGHEAD
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}

@@ -15,6 +15,7 @@ public class Wave : MonoBehaviour
     public bool paused = false;
     public bool quitMenu = false;
     public bool placeTower = false;
+    public TowerType choosedTower;
     public bool diff_select = true;
 
     public double maxObstacles = 0;

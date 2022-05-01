@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1724784077660162004}
   - component: {fileID: 4810554760928778372}
-  - component: {fileID: 5809119120683129638}
   - component: {fileID: 8031416048055236477}
   - component: {fileID: 210344289170198875}
   - component: {fileID: 4024284535006990575}
   - component: {fileID: -8364529493716385268}
   - component: {fileID: 2200226071521363855}
   - component: {fileID: 1594236047633726971}
+  - component: {fileID: -9200863128530784847}
   m_Layer: 0
   m_Name: Bloodthirsty
   m_TagString: Enemy
@@ -89,21 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5809119120683129638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77952005857666816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a788c8d248fcf8346a75294ce33de559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyHealth: 10
-  KillReward: 2
-  Damage: 2
 --- !u!114 &8031416048055236477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +229,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-9200863128530784847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77952005857666816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d852d39dc3fe094e9159d893a956074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyHealth: 10
+  KillReward: 5
+  Damage: 2

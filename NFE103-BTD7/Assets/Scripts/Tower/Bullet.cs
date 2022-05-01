@@ -44,6 +44,7 @@ public class Bullet : MonoBehaviour
         enemy.LooseLife(shooter.damage);
         if (enemy.EnemyHealth <= 0)
         {
+            Player.GetInstance().EarnGold(enemy.KillReward);
             Destroy(target.gameObject);
             Wave.GetInstance().ModifMonsterLeft();
         }

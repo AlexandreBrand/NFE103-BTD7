@@ -80,7 +80,7 @@ public class Game : MonoBehaviour
             {
                 foreach (var curHit in hitTab)
                 {
-                    if (curHit.collider != null && curHit.collider.gameObject.tag == "Gunner")
+                    if (curHit.collider != null && curHit.collider.gameObject.tag == "Tower")
                     {
                         GameObject towerGO = curHit.collider.gameObject;
                         Vector2 posGO = new Vector2(towerGO.transform.position.x, towerGO.transform.position.y);

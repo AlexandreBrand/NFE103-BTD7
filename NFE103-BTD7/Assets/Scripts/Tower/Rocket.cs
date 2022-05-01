@@ -4,35 +4,14 @@ using UnityEngine;
 
 public class Rocket : Tower
 {
-    public GameObject PrefabTower;
-    public float Rate { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public float Range { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public float Damage { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public float Zone { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public int X { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public int Y { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    public Rocket()
+    protected override void Start()
     {
-        Rate = 5;
-        Range = 200;
-        Damage = 5;
-        Zone = 2;
-
-        GameObject newGunner = Instantiate(PrefabTower);
-        MapGenerator map = GetComponent<MapGenerator>();
-        newGunner = MapGenerator.GetInstance().StartC;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 }

@@ -9,19 +9,17 @@ using UnityEngine.EventSystems;
 public abstract class Tower : MonoBehaviour
 {
     [SerializeField] public float fireRate;
-    [SerializeField] public float fireCountDown;
     [SerializeField] public float range;
     [SerializeField] public float damage;
     [SerializeField] public int price;
-    [SerializeField] public float zone;
-    [SerializeField] public bool isPrefabRangeCreated = false;
-    [SerializeField] public Transform target;
     [SerializeField] public GameObject bulletPrefab;
-    [SerializeField] public Transform firePoint;
     [SerializeField] public GameObject rangePrefab;
     [SerializeField] public Color32 rangePrefabColor;
-    private Animator animator;
 
+    private Animator animator;
+    public float fireCountDown;
+    public Transform target;
+    public Transform firePoint;
     public int level;
 
     // Start is called before the first frame update
@@ -94,7 +92,7 @@ public abstract class Tower : MonoBehaviour
 
         if (bullet != null)
         {
-            animator.SetTrigger("TowerShootTrigger");
+            //animator.SetTrigger("TowerShootTrigger");
             bullet.shooter = this;
             bullet.Seek(target);
         }

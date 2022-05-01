@@ -11,7 +11,11 @@ public class PlaceTower : MonoBehaviour
     //@TODO mettre ? jour avec l'interface
     public GameObject obstacle;
 
-    public GameObject tower;
+    //public GameObject tower;
+    //public GameObject gunner;
+    //public GameObject gatling;
+    //public GameObject rocket;
+    //public GameObject sniper;
 
     //private new BoxCollider2D collider;
 
@@ -107,7 +111,8 @@ public class PlaceTower : MonoBehaviour
 
     private void createTower(Vector2 clickPos)
     {
-        GameObject newTower = Instantiate(tower);
+        GameObject newTower = TowerFactory.GetTower(Wave.GetInstance().choosedTower);
+        //GameObject newTower = Instantiate(tower);
         if (Player.GetInstance().SpendGold(newTower.GetComponent<Tower>().GetPrice()))
         {
             newTower.transform.position = clickPos;

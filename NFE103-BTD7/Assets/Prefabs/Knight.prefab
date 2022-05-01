@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3325001980320280807}
   - component: {fileID: 8865872722843119543}
-  - component: {fileID: 7590057796539100181}
   - component: {fileID: 6250499312777609294}
   - component: {fileID: 4260446281373017704}
   - component: {fileID: 1013959879018833884}
   - component: {fileID: 3767980251640497562}
   - component: {fileID: 39529486596618407}
   - component: {fileID: 7557809986080793705}
+  - component: {fileID: -2592661263713214170}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Enemy
@@ -89,21 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7590057796539100181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4098168709778378803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a788c8d248fcf8346a75294ce33de559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyHealth: 20
-  KillReward: 5
-  Damage: 9
 --- !u!114 &6250499312777609294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +229,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-2592661263713214170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098168709778378803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d7d1a58cf9c104d89741fb01804d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyHealth: 20
+  KillReward: 5
+  Damage: 9
