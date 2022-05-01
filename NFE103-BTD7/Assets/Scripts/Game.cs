@@ -21,12 +21,10 @@ public class Game : MonoBehaviour
         _instance = this;
     }
 
-
     public void Start()
     {
         TowerManagementPanel.SetActive(false);
     }
-
 
     public static Game GetInstance()
     {
