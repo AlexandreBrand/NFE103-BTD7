@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 using Pathfinding;
+using UnityEngine.EventSystems;
 
 public class ObstaclesCreation : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ObstaclesCreation : MonoBehaviour
     public GameObject obstacle;
     public static List<GameObject> obstacleTiles = new List<GameObject>();
     public TextMeshProUGUI obs_restants;
-
+    private bool hasCollied = false;
 
     void Start()
     {
@@ -45,69 +46,28 @@ public class ObstaclesCreation : MonoBehaviour
     }
 
 
+
     private void checkClickObstacle(Vector2 clickPos)
     {
-        bool hasCollied = false;
+        hasCollied = false;
 
         if (
-            obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1 ||
-            checkPath(clickPos) ||
-            Wave.GetInstance().quitMenu ||
-            Game.GetInstance().GameStarted
-            ) { }
-
-        //Cellule libre - OK pour placement
-        else
+            !(obstacleTiles.Count > Wave.GetInstance().maxObstacles - 1) && //Max d'obstacles atteint
+            !Wave.GetInstance().quitMenu && //Menu quitter actif
+            !OutOfMap(clickPos) &&
+            !Game.GetInstance().GameStarted
+            )
         {
-            foreach (GameObject obs in obstacleTiles)
-            {
-                Vector2 pos = obs.transform.position;
-                if (pos == clickPos && !Wave.GetInstance().waveStarted)
-                {
-                    if (PlaceTower.towerTiles != null && PlaceTower.towerTiles.Count > 0)
-                    {
-                        foreach (GameObject tower in PlaceTower.towerTiles)
-                        {
-                            Vector2 posTower = tower.transform.position;
-                            if (posTower == clickPos)
-                            {
-                                Game.GetInstance().Message.text = "Il y a déjà une tourelle";
-                                hasCollied = true;
-                                break;
-                            }
-                            else
-                            {
-                                Destroy(obs);
-                                obstacleTiles.Remove(obs);
-                                Game.GetInstance().Message.text = "Obstacle supprimé";
-                                obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
-                                hasCollied = true;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Destroy(obs);
-                        obstacleTiles.Remove(obs);
-                        Game.GetInstance().Message.text = "Obstacle supprimé";
-                        hasCollied = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasCollied)
-            {
+            checkOccupied(clickPos);
+
+            if (checkPath(clickPos) && !hasCollied)
                 createObstacle(clickPos);
-                obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
-            }
         }
     }
 
-    private bool checkPath(Vector2 clickPos)
-    {
-        //TODO test si le placement va bloquer le chemin
 
+    private bool OutOfMap(Vector2 clickPos)
+    {
         int h = MapGenerator.GetInstance().Height;
         int w = MapGenerator.GetInstance().Width;
 
@@ -115,20 +75,85 @@ public class ObstaclesCreation : MonoBehaviour
         {
             return true; //Hors de la map
         }
-        
-        if (obstacleTiles.Count(item => item.transform.position.x == clickPos.x) == h - 1)
+
+        return false;
+    }
+
+
+    private void checkOccupied(Vector2 clickPos)
+    {
+        foreach (GameObject obs in obstacleTiles)
         {
-            return true; // Colonne bloquée
+            Vector2 pos = obs.transform.position;
+            if (pos == clickPos && !Wave.GetInstance().waveStarted && !checkTower(clickPos))
+            {
+                destroyObstacle(obs);
+                break;
+            }
+        }
+    }
+
+
+    private bool checkTower(Vector2 clickPos)
+    {
+        if (PlaceTower.towerTiles != null && PlaceTower.towerTiles.Count > 0)
+        {
+            foreach (GameObject tower in PlaceTower.towerTiles)
+            {
+                Vector2 posTower = tower.transform.position;
+                if (posTower == clickPos)
+                {
+                    Game.GetInstance().Message.text = "Vendez la tourelle pour pouvoir retirer l'obstacle";
+                    hasCollied = true;
+                    return true;
+                }
+            }
         }
         return false;
     }
 
-    private void createObstacle(Vector2 clickPos)
+
+    private bool checkPath(Vector2 clickPos)
+    {
+        GameObject testObstacle = Instantiate(obstacle);
+        testObstacle.transform.position = clickPos;
+        AstarPath.active.Scan();
+
+        GraphNode node1 = AstarPath.active.GetNearest(MapGenerator.GetInstance().StartC.transform.position, NNConstraint.Default).node;
+        GraphNode node2 = AstarPath.active.GetNearest(MapGenerator.GetInstance().EndC.transform.position, NNConstraint.Default).node;
+
+        if (!PathUtilities.IsPathPossible(node1, node2))
+        {
+            Destroy(testObstacle);
+            Game.GetInstance().Message.text = "Placement impossible";
+            return false; // Chemin bloqué
+        }
+        Destroy(testObstacle);
+
+        return true;
+    }
+
+
+    private GameObject createObstacle(Vector2 clickPos)
     {
         GameObject newObstacle = Instantiate(obstacle);
         newObstacle.transform.position = clickPos;
         obstacleTiles.Add(newObstacle);
         Game.GetInstance().Message.text = "Obstacle placé";
+        obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
+        AstarPath.active.Scan();
+
+        return newObstacle;
+    }
+
+
+    private void destroyObstacle(GameObject obs)
+    {
+        Destroy(obs);
+        obstacleTiles.Remove(obs);
+        Game.GetInstance().Message.text = "Obstacle supprimé";
+        obs_restants.text = "Obstacles restants : " + (Wave.GetInstance().maxObstacles - obstacleTiles.Count());
+        hasCollied = true;
         AstarPath.active.Scan();
     }
 }

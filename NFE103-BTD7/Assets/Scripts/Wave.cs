@@ -149,6 +149,7 @@ public class Wave : MonoBehaviour
 
     public void StartWave()
     {
+        AstarPath.active.Scan();
         monsterNbr = tanksNbr + knightNbr + assassinsNbr;
         Game.GetInstance().GameStarted = true;
         waveStateText.text = "PAUSE";
