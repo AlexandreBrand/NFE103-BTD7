@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,9 +22,9 @@ public class Game : MonoBehaviour
         _instance = this;
     }
 
-    public void Start()
+    public void Update()
     {
-        TowerManagementPanel.SetActive(false);
+        Click();
     }
 
     public static Game GetInstance()
@@ -59,5 +61,61 @@ public class Game : MonoBehaviour
         DifficultyPanel.SetActive(true);
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
+    }
+
+    private void Click()
+    {
+        if (Input.GetMouseButtonDown(0) && !Wave.GetInstance().placeTower)
+        {
+            Vector2 clickPos;
+            clickPos = new Vector2(
+                Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
+                Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
+
+            var hitTab = Physics2D.RaycastAll(clickPos, Vector2.zero);
+
+            var isTowerPanel = hitTab.Any(h => h.collider.gameObject.tag == "TowerPanel");
+
+            if (hitTab.Any(h => h.collider.gameObject.GetComponent<Tower>()) && !isTowerPanel)
+            {
+                foreach (var curHit in hitTab)
+                {
+                    if (curHit.collider != null && curHit.collider.gameObject.tag == "Gunner")
+                    {
+                        GameObject towerGO = curHit.collider.gameObject;
+                        Vector2 posGO = new Vector2(towerGO.transform.position.x, towerGO.transform.position.y);
+                        if (clickPos == posGO)
+                        {
+                            if (Wave.GetInstance().selectedTower != null)
+                            {
+                                Wave.GetInstance().selectedTower.GetComponent<Tower>().rangePrefab.GetComponent<Renderer>().enabled = false;
+                            }
+                            Wave.GetInstance().selectedTower = towerGO;
+                            PlaceTower.GetInstance().towerPanel.SetActive(true);
+                            Wave.GetInstance().selectedTower.GetComponent<Tower>().rangePrefab.GetComponent<Renderer>().enabled = true;
+                            PlaceTower.GetInstance().UpdateTowerPanel(Wave.GetInstance().selectedTower.GetComponent<Tower>().level, Wave.GetInstance().selectedTower.GetComponent<Tower>().price);
+                        }
+                        else
+                        {
+                            PlaceTower.GetInstance().towerPanel.SetActive(false);
+                            Wave.GetInstance().selectedTower.GetComponent<Tower>().rangePrefab.GetComponent<Renderer>().enabled = false;
+                            Wave.GetInstance().selectedTower = null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (!isTowerPanel)
+                {
+                    if (Wave.GetInstance().selectedTower != null)
+                    {
+                        Wave.GetInstance().selectedTower.GetComponent<Tower>().rangePrefab.GetComponent<Renderer>().enabled = false;
+                        Wave.GetInstance().selectedTower = null;
+                    }
+                    PlaceTower.GetInstance().towerPanel.SetActive(false);
+                }
+            }
+        }
     }
 }

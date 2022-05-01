@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8408323663119799247}
   m_Layer: 0
   m_Name: Gunner
-  m_TagString: Untagged
+  m_TagString: Gunner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
   rangePrefabColor:
     serializedVersion: 2
     rgba: 0
+  level: 0
 --- !u!61 &-8338389303784515372
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -87,7 +87,6 @@ public class PlaceTower : MonoBehaviour
                             else
                             {
                                 Game.GetInstance().Message.text = "Tourelle placée";
-                                Debug.Log("Tourelle placée");
                                 createTower(clickPos);
                                 Wave.GetInstance().SetPlaceTower(false);
                                 break;
@@ -97,7 +96,6 @@ public class PlaceTower : MonoBehaviour
                     else
                     {
                         Game.GetInstance().Message.text = "Tourelle placée";
-                        Debug.Log("Tourelle placée else");
                         createTower(clickPos);
                         Wave.GetInstance().SetPlaceTower(false);
                         Wave.GetInstance().placeTower = false;

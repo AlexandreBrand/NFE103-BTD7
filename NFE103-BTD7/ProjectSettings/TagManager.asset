@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - TowerPanel
   - DifficultyPanel
+  - Gunner
   layers:
   - Default
   - TransparentFX
