@@ -11,7 +11,6 @@ public class Game : MonoBehaviour
     private static Game _instance;
 
     [SerializeField] GameObject DifficultyPanel;
-    [SerializeField] GameObject QuitPanel;
     [SerializeField] GameObject TowerManagementPanel;
     public TextMeshProUGUI Message;
     public bool GameStarted = false;
@@ -52,34 +51,13 @@ public class Game : MonoBehaviour
         GetComponent<ObstaclesCreation>().obs_restants.text = "Obstacles restants : " + Wave.GetInstance().maxObstacles.ToString();
     }
 
-    public void Quit()
-    {
-        Wave.GetInstance().quitMenu = true;
-        Time.timeScale = 0;
-        QuitPanel.SetActive(true);
-    }
 
-    public void ConfirmQuit()
+    public void Quit()
     {
         Wave.GetInstance().endWave();
         GameStarted = false;
         DifficultyPanel.SetActive(true);
         Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
-    }
-
-    public void CancelQuit()
-    {
-        Wave.GetInstance().quitMenu = false;
-        if (Wave.GetInstance().paused)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-
-        QuitPanel.SetActive(false);
     }
 }

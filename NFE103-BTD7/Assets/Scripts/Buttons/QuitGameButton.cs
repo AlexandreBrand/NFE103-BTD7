@@ -7,18 +7,10 @@ using UnityEngine.EventSystems;
 
 public class QuitGameButton : MonoBehaviour
 {
+
     public void QuitGame()
     {
+        Debug.Log("test confirm");
         Game.GetInstance().Quit();
-    }
-
-    public void ConfirmQuitGame()
-    {
-        Game.GetInstance().ConfirmQuit();
-    }
-
-    public void CancelQuitGame()
-    {
-        Game.GetInstance().CancelQuit();
     }
 }
