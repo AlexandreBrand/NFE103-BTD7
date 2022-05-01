@@ -20,6 +20,7 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] public Transform firePoint;
     [SerializeField] public GameObject rangePrefab;
     [SerializeField] public Color32 rangePrefabColor;
+    private Animator animator;
 
     public int level;
 
@@ -31,6 +32,7 @@ public abstract class Tower : MonoBehaviour
         rangePrefabColor = rangePrefab.GetComponent<Renderer>().sharedMaterial.color;
         
         level = 1;
+        animator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -107,6 +109,7 @@ public abstract class Tower : MonoBehaviour
 
         if (bullet != null)
         {
+            animator.SetTrigger("TriggerShoot");
             bullet.Seek(target);
         }
         //Target.EnemyHealth = Target.EnemyHealth - Damage;
