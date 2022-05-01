@@ -38,7 +38,6 @@ public abstract class Tower : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        //TowerClicked();
         UpdateTarget();
         if (fireCountDown < 0f && target != null)
         {
@@ -54,7 +53,6 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
-    //Pour ne pas gaspiller de ressources
     private void UpdateTarget()
     {
         //plus proche
@@ -97,9 +95,9 @@ public abstract class Tower : MonoBehaviour
         if (bullet != null)
         {
             animator.SetTrigger("TowerShootTrigger");
+            bullet.shooter = this;
             bullet.Seek(target);
         }
-        //Target.EnemyHealth = Target.EnemyHealth - Damage;
     }
 
     public void createPrefabRange()

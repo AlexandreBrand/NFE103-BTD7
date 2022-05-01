@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private Transform target;
     public float speed;
+    public Tower shooter;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +40,13 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject);
         //A supprimer test sans vie
-        Destroy(target.gameObject);
-        Wave.GetInstance().ModifMonsterLeft();
+        var enemy = target.gameObject.GetComponent<IEnemy>();
+        enemy.LooseLife(shooter.damage);
+        if (enemy.EnemyHealth <= 0)
+        {
+            Destroy(target.gameObject);
+            Wave.GetInstance().ModifMonsterLeft();
+        }
         Wave.GetInstance().endWave();
     }
 

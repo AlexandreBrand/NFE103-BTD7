@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a788c8d248fcf8346a75294ce33de559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHealth: 60
+  EnemyHealth: 40
   KillReward: 10
   Damage: 5
 --- !u!114 &-247388991901713278

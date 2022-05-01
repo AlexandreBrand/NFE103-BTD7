@@ -17,4 +17,8 @@ public abstract class IEnemy : MonoBehaviour
             Physics2D.IgnoreCollision(collider1, collider2);
         }
     }
+    public void LooseLife(float dmg)
+    {
+        EnemyHealth -= dmg;
+    }
 }

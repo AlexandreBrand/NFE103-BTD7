@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 1
   fireCountDown: 0
-  range: 12
+  range: 5
   damage: 10
   price: 50
   zone: 0
