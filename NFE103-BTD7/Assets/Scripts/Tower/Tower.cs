@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,7 +132,7 @@ public abstract class Tower : MonoBehaviour
 
         if (bullet != null)
         {
-            animator.SetTrigger("TriggerShoot");
+            animator.SetTrigger("TowerShootTrigger");
             bullet.Seek(target);
         }
         //Target.EnemyHealth = Target.EnemyHealth - Damage;
