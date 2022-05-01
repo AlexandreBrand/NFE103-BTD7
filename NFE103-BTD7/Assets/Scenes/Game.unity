@@ -2902,7 +2902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630d9a48c98304e1ab49aa6ef9b4b170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DifficultyPanel: {fileID: 1532342979}
+  DifficultyPanel: {fileID: 1458956027}
   Message: {fileID: 1082763718}
   GameStarted: 0
 --- !u!114 &218452647

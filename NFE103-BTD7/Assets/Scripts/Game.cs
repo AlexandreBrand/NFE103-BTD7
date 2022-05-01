@@ -19,11 +19,6 @@ public class Game : MonoBehaviour
         _instance = this;
     }
 
-    public void Start()
-    {
-
-    }
-
     public static Game GetInstance()
     {
         return _instance;

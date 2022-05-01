@@ -8,17 +8,6 @@ using UnityEngine.EventSystems;
 
 public abstract class Tower : MonoBehaviour
 {
-    //int X { get; set; }
-    //int Y { get; set; }
-    //[SerializeField] public float fireRate { get; set; }
-    //[SerializeField] public float fireCountDown { get; set; }
-    //[SerializeField] public float range { get; set; }
-    //[SerializeField] public float damage { get; set; }
-    //[SerializeField] public float zone { get; set; }
-    //[SerializeField] public Transform target { get; set; }
-    //[SerializeField] public GameObject bulletprefab { get; set; }
-    //[SerializeField] public Transform firePoint { get; set; }
-
     [SerializeField] public float fireRate;
     [SerializeField] public float fireCountDown;
     [SerializeField] public float range;
@@ -33,18 +22,6 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] public Color32 rangePrefabColor;
 
     public int level;
-
-    //public static GameObject getTowerPanelInstance()
-    //{
-    //    if (towerPanel == null)
-    //    {
-    //        return GameObject.FindGameObjectWithTag("TowerPanel");
-    //    }
-    //    else
-    //    {
-    //        return towerPanel;
-    //    }
-    //}
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -69,10 +46,10 @@ public abstract class Tower : MonoBehaviour
 
         fireCountDown -= Time.deltaTime;
 
-        if (Wave.GetInstance().selectedTower != null)
-        {
-            PlaceTower.GetInstance().UpdateTowerPanel(level, price);
-        }
+        //if (Wave.GetInstance().selectedTower != null)
+        //{
+        //    PlaceTower.GetInstance().UpdateTowerPanel(level, price);
+        //}
     }
 
     //Pour ne pas gaspiller de ressources
@@ -143,16 +120,6 @@ public abstract class Tower : MonoBehaviour
                                                         //largeur, hauteur, prodondeur
         newTowerRange.transform.localScale = new Vector3(range*2, range*2, range);
         rangePrefab = newTowerRange;
-        //Color32 color1 = rangePrefabColor;
-        //color1.a = 0;
-        //newTowerRange.GetComponent<Renderer>().sharedMaterial.color = color1;
-
-        //newTowerRange.GetComponent<Renderer>().sharedMaterial.color.a = 0;
-
-        //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
-        //newTowerRange.GetComponent<Renderer>().sharedMaterial.color = color;
-
-        //newTowerRange.transform.localScale = new Vector3(10f, 10f, 10f);
     }
 
     private void OnMouseDown()
@@ -166,7 +133,7 @@ public abstract class Tower : MonoBehaviour
 
             Vector2 towerPos = transform.position;
 
-            var towerGO = PlaceTower.towerTiles.Where(t => t.GetComponent<Tower>() == this).FirstOrDefault();
+            GameObject towerGO = PlaceTower.towerTiles.Where(t => t.GetComponent<Tower>() == this).FirstOrDefault();
             //var towerGO = PlaceTower.towerTiles.Where(t => t.transform.position == transform.position).FirstOrDefault();
 
             if (clickPos == towerPos)
@@ -179,9 +146,18 @@ public abstract class Tower : MonoBehaviour
                 }
                 else
                 {
+                    if (Wave.GetInstance().selectedTower != null)
+                    {
+                        //Reset old
+                        Wave.GetInstance().selectedTower.GetComponent<Tower>().rangePrefab.GetComponent<Renderer>().enabled = false;
+                    }
+
+                    //Set new
                     Wave.GetInstance().selectedTower = towerGO;
                     PlaceTower.GetInstance().towerPanel.SetActive(true);
                     rangePrefab.GetComponent<Renderer>().enabled = true;
+
+                    PlaceTower.GetInstance().UpdateTowerPanel(level, price);
                 }
             }
             else
@@ -195,13 +171,14 @@ public abstract class Tower : MonoBehaviour
 
     public void Upgrade()
     {
-        if (Player.GetInstance().SpendGold(Wave.GetInstance().selectedTower.GetComponent<Tower>().GetPrice()))
+        if (Player.GetInstance().SpendGold(Convert.ToInt32(Wave.GetInstance().selectedTower.GetComponent<Tower>().GetPrice()*0.8)))
         {
             level++;
             price = Convert.ToInt32(price * 1.05);
             range = range * 1.05f;
             damage = damage * 1.05f;
             rangePrefab.transform.localScale = new Vector3(range * 2, range * 2, range);
+            PlaceTower.GetInstance().UpdateTowerPanel(level, price);
         }
     }
 
