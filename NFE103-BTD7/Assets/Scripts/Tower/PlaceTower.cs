@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlaceTower : MonoBehaviour
 {
-
+    private static PlaceTower _instance;
     //@TODO mettre ? jour avec l'interface
     public GameObject obstacle;
 
@@ -16,6 +16,18 @@ public class PlaceTower : MonoBehaviour
     //private new BoxCollider2D collider;
 
     public static List<GameObject> towerTiles = new List<GameObject>();
+
+    [SerializeField] public TextMeshProUGUI levelText;
+    [SerializeField] public TextMeshProUGUI upgradePriceText;
+
+    public static PlaceTower GetInstance()
+    {
+        return _instance;
+    }
+    void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
@@ -36,7 +48,11 @@ public class PlaceTower : MonoBehaviour
         }
     }
 
-
+    public void UpdateTowerPanel(int level, int price)
+    {
+        levelText.text = "lvl " + level;
+        upgradePriceText.text = price + " g";
+    }
 
     public void checkClickOnObstacleTower(Vector2 clickPos)
     {
@@ -96,6 +112,6 @@ public class PlaceTower : MonoBehaviour
         {
             newTower.transform.position = clickPos;
             towerTiles.Add(newTower);
-        }   
+        }
     }
 }

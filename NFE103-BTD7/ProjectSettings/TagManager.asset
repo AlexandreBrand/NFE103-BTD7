@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GameButton
   - Enemy
+  - TowerPanel
+  - DifficultyPanel
   layers:
   - Default
   - TransparentFX

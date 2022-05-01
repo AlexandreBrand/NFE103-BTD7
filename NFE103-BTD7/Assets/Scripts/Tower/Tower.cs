@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -29,17 +32,39 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] public GameObject rangePrefab;
     [SerializeField] public Color32 rangePrefabColor;
 
+    [SerializeField] public static GameObject towerPanel;
+
+    public int level;
+
+    //public static GameObject getTowerPanelInstance()
+    //{
+    //    if (towerPanel == null)
+    //    {
+    //        return GameObject.FindGameObjectWithTag("TowerPanel");
+    //    }
+    //    else
+    //    {
+    //        return towerPanel;
+    //    }
+    //}
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         //InvokeRepeating("UpdateTarget", 0f, 0.5f);
         createPrefabRange();
         rangePrefabColor = rangePrefab.GetComponent<Renderer>().sharedMaterial.color;
+        
+        level = 1;
+
+        towerPanel = GameObject.FindGameObjectWithTag("TowerPanel");
+        towerPanel.SetActive(false);
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        //TowerClicked();
         UpdateTarget();
         if (fireCountDown < 0f && target != null)
         {
@@ -48,6 +73,11 @@ public abstract class Tower : MonoBehaviour
         }
 
         fireCountDown -= Time.deltaTime;
+
+        if (Wave.GetInstance().selectedTower != null)
+        {
+            PlaceTower.GetInstance().UpdateTowerPanel(level, price);
+        }
     }
 
     //Pour ne pas gaspiller de ressources
@@ -130,17 +160,76 @@ public abstract class Tower : MonoBehaviour
         //newTowerRange.transform.localScale = new Vector3(10f, 10f, 10f);
     }
 
+    private void OnMouseDown()
+    {
+        if (Input.GetMouseButtonDown(0) && !Wave.GetInstance().placeTower)
+        {
+            Vector2 clickPos;
+            clickPos = new Vector2(
+                Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
+                Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
+
+            Vector2 towerPos = transform.position;
+
+            var towerGO = PlaceTower.towerTiles.Where(t => t.GetComponent<Tower>() == this).FirstOrDefault();
+            //var towerGO = PlaceTower.towerTiles.Where(t => t.transform.position == transform.position).FirstOrDefault();
+
+            if (clickPos == towerPos)
+            {
+                if (Wave.GetInstance().selectedTower == towerGO)
+                {
+                    Wave.GetInstance().selectedTower = null;
+                    towerPanel.SetActive(false);
+                    rangePrefab.GetComponent<Renderer>().enabled = false;
+                }
+                else
+                {
+                    Wave.GetInstance().selectedTower = towerGO;
+                    towerPanel.SetActive(true);
+                    rangePrefab.GetComponent<Renderer>().enabled = true;
+                }
+            }
+            else
+            {
+                Wave.GetInstance().selectedTower = null;
+                towerPanel.SetActive(false);
+                rangePrefab.GetComponent<Renderer>().enabled = false;
+            }
+        }
+    }
+
+    public void Upgrade()
+    {
+        if (Player.GetInstance().SpendGold(Wave.GetInstance().selectedTower.GetComponent<Tower>().GetPrice()))
+        {
+            level++;
+            price = Convert.ToInt32(price * 1.05);
+            range = range * 1.05f;
+            damage = damage * 1.05f;
+            rangePrefab.transform.localScale = new Vector3(range * 2, range * 2, range);
+        }
+    }
+
+    public void Sell()
+    {
+        Player.GetInstance().EarnGold(Wave.GetInstance().selectedTower.GetComponent<Tower>().GetPrice());
+        PlaceTower.towerTiles.Remove(Wave.GetInstance().selectedTower);
+        Destroy(Wave.GetInstance().selectedTower);
+        Destroy(rangePrefab);
+    }
+
     private void OnMouseEnter()
     {
-        rangePrefab.GetComponent<Renderer>().enabled = true;
-        //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 125);
-        //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
+        //rangePrefab.GetComponent<Renderer>().enabled = true;
     }
 
     private void OnMouseExit()
     {
-        rangePrefab.GetComponent<Renderer>().enabled = false;
-        //Color32 color = new Color32(rangePrefabColor.r, rangePrefabColor.g, rangePrefabColor.b, 0);
-        //rangePrefab.GetComponent<Renderer>().sharedMaterial.color = color;
+        //rangePrefab.GetComponent<Renderer>().enabled = false;
+    }
+
+    public GameObject GetRangePrefab()
+    {
+        return rangePrefab;
     }
 }

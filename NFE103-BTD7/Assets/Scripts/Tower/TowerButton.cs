@@ -11,4 +11,13 @@ public class TowerButton : MonoBehaviour
         if (Wave.GetInstance().placeTower) Game.GetInstance().Message.text = "Placez la tourelle";
         else Game.GetInstance().Message.text = "";
     }
+
+    public void SellTowerOnClick()
+    {
+        Wave.GetInstance().selectedTower.GetComponent<Tower>().Sell();
+    }
+    public void UpgradeTowerOnClick()
+    {
+        Wave.GetInstance().selectedTower.GetComponent<Tower>().Upgrade();
+    }
 }

@@ -34,7 +34,7 @@ public class Wave : MonoBehaviour
     private int monstersLeft = 0;
     private int spawnedMonsters = 0;
 
-    
+    public GameObject selectedTower;
     
     public TextMeshProUGUI waveStateText;
     public TextMeshProUGUI waveLvL;
