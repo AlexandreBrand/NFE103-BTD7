@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class ObstaclesCreation : MonoBehaviour
 {
-    private new BoxCollider2D collider;
+    private BoxCollider2D collider;
     public GameObject obstacle;
     public static List<GameObject> obstacleTiles = new List<GameObject>();
     public TextMeshProUGUI obs_restants;
