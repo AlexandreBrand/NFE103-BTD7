@@ -118,5 +118,9 @@ public class PlaceTower : MonoBehaviour
             newTower.transform.position = clickPos;
             towerTiles.Add(newTower);
         }
+        else
+        {
+            Destroy(newTower);
+        }
     }
 }
