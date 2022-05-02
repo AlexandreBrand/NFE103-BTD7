@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DifficultySelection" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Buttons\DifficultySelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuPlay" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Buttons\MenuPlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuitGameButton" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Buttons\QuitGameButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartWaveButton" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Buttons\StartWaveButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BloodThirsty">
+    <Position X="17.25" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\BloodThirsty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyFactory">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAAgAAAAAAAAAAAAAAAAAAAQAAAgAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\EnemyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IEnemy">
+    <Position X="17.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAACAAAAAAAAAAAAAIAAAAAAAAAAAABAgAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\IEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Knight">
+    <Position X="14.75" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Knight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tank">
+    <Position X="19.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Tank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bullet" Collapsed="true">
+    <Position X="18.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQAAKAAAAAAAAAAAAQAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gatling">
+    <Position X="6.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\Gatling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gunner">
+    <Position X="4.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\Gunner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaceTower" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEIAAAACAAAAQAgAAYAAAABAAAAQAAAAAAAgIAAEA=</HashCode>
+      <FileName>Assets\Scripts\Tower\PlaceTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rocket">
+    <Position X="8.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\Rocket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sniper">
+    <Position X="10.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\Sniper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tower">
+    <Position X="7.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAQBAQAIACIAhACAcAAgCAAgAAECAAAAAAABAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\Tower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerButton" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAAwAAAAAAAABAAAAAAACAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\TowerButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerFactory">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAABAAQCAAAAAAAggAAAAAAAAAAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Tower\TowerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EncCellScript" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\EncCellScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game">
+    <Position X="9" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAADAAAAAABAAAAAAAAAABAAAAAAAAAAAIAAAA0E=</HashCode>
+      <FileName>Assets\Scripts\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapGenerator">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAUAAAAJCBAAAAAAAAAAEAABgAAACAAQAAAEAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\MapGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObstaclesCreation">
+    <Position X="11" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAQAAgACAA4AAAAAgAAAAAAAAAAkAABAABEAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\ObstaclesCreation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="14.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAASAAAAAAAAEAAAEABAIAAAAAAEAAACABEEE=</HashCode>
+      <FileName>Assets\Scripts\player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wave">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgWkgBEIBCAKABIAABgIgCSBFgAAAEgZwAEBABAAJEA=</HashCode>
+      <FileName>Assets\Scripts\Wave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="EnemyType">
+    <Position X="20" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAEAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\EnemyType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TowerType">
+    <Position X="5.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAIAQAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower\TowerType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
